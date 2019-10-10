@@ -11,14 +11,25 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
+
+Route::prefix('v1/api/')->group(function () {
+  Route::prefix('feature')->group(function () {
+    Route::get('index', 'FeatureController@index')->name('feature.index');
+  });
+
+  Route::prefix('package')->group(function () {
+    Route::get('index', 'PackageController@index')->name('package.index');
+  });
 });
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/{path}', function () {
+  return view('content');
+})->where('path', '.*');
