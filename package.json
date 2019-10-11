@@ -25,10 +25,14 @@
         "sass-loader": "^7.1.0"
     },
     "dependencies": {
+        "react-addons-update": "^15.6.2",
+        "react-bootstrap": "^0.32.4",
         "react-redux": "^7.1.1",
         "react-router-dom": "^5.1.2",
         "redux": "^4.0.4",
         "redux-logger": "^3.0.6",
-        "redux-thunk": "^2.3.0"
+        "redux-thunk": "^2.3.0",
+        "semantic-ui-css": "^2.4.1",
+        "semantic-ui-react": "^0.88.1"
     }
 }
