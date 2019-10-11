@@ -25,7 +25,10 @@ Route::prefix('v1/api/')->group(function () {
   });
 
   Route::prefix('package')->group(function () {
-    Route::get('index', 'PackageController@index')->name('package.index');
+    Route::get('getData', 'PackageController@getData')->name('package.getData');
+    Route::post('store', 'PackageController@store')->name('package.store');
+    Route::get('toggleActive/{id}', 'PackageController@toggleActive')->name('package.toggleActive');
+    Route::get('destroy/{id}', 'PackageController@destroy')->name('package.destroy');
   });
 });
 

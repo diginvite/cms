@@ -3,13 +3,15 @@ import {Link}  from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter} from 'react-router-dom';
-// import { Tabs, Tab } from 'react-bootstrap';
-import { Tab } from 'semantic-ui-react'
+import { Tab } from 'semantic-ui-react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import SweetAlert from 'react-bootstrap-sweetalert';
 
 import Table from '../../components/packages/Table';
 import CreateForm from '../../components/packages/CreateForm';
 
-// import {getPosts, destroyPost, toggleActivePost, togglePublishPost} from '../../actions/post-action';
+import { storePackage, getPackages, taggleActivePackage, destroyPackage} from '../../actions/package-action';
 
 class Index extends Component {
   constructor(props){
@@ -18,6 +20,8 @@ class Index extends Component {
       name: '',
       nameError: false,
       description: '',
+      data: [],
+      alert: null,
     }
   }
 
@@ -42,23 +46,77 @@ class Index extends Component {
         name: this.state.name,
         description: this.state.description
       }
-      this.setState({name: '', description: ''});
+      this.props.storePackage(data).then(() => {
+        this.setState({name: '', description: ''});
+        toast.success("Data saved !", {
+          position: toast.POSITION.TOP_RIGHT
+        });
+      });
     }
   }
 
-  handleDelete(data) {
-    // let result = confirm("Want to delete?");
-    // if (result) {
-    //   this.props.destroyPost(data);
-    // }    
+  onConfirm(i, data, flag){
+    const getAlert = () => (
+      <SweetAlert
+        warning
+        showCancel
+        confirmBtnText={
+            flag == 'toggleActive' ?
+            "Yes change it" :
+            flag == 'destroy' ?
+            "Yes delete it" : null
+          }
+        confirmBtnBsStyle={
+            flag == 'toggleActive' ?
+            "primary" :
+            flag == 'destroy' ?
+            "danger" : null
+          }
+        cancelBtnBsStyle="default"
+        title="Are you sure?"
+       onConfirm={
+            flag == 'toggleActive' ?
+            () => this.onToggleActive(i, data): 
+            flag == 'destroy' ?
+            () => this.onDestroy(i, data):
+            null
+         }
+        onCancel={() => this.onHideAlert()}
+      >
+      {
+          flag == 'toggleActive' ?
+          "Change stat for this data!" :
+          flag == 'destroy' ?
+          "You will not be able to recover this imaginary file!" : null
+      }
+      </SweetAlert>
+    );
+
+    this.setState({
+        alert: getAlert()
+    });
   }
 
-  handleToggleActive(data, i){
-    // this.props.toggleActivePost(data, i);
+  onHideAlert(){
+    this.setState({alert: null})
   }
 
-  handleTogglePublish(data, i){
-    // this.props.togglePublishPost(data, i);
+  onToggleActive(i, data){
+    this.props.taggleActivePackage(i, data).then(() => {
+      this.onHideAlert()
+      toast.success("Data updated !", {
+        position: toast.POSITION.TOP_RIGHT
+      });
+    })
+  }
+
+  onDestroy(i, data){
+    this.props.destroyPackage(i, data).then(() => {
+      this.onHideAlert()
+      toast.success("Data deleted !", {
+        position: toast.POSITION.TOP_RIGHT
+      });
+    })
   }
 
   render() {
@@ -68,6 +126,7 @@ class Index extends Component {
           render: () => <Tab.Pane>
             <Table
               data={this.props.packages}
+              onConfirm={(i, data, flag) => this.onConfirm(i, data, flag)}
             />
           </Tab.Pane>,
         },
@@ -110,6 +169,8 @@ class Index extends Component {
               </div>
             </div>
           </section>
+          {this.state.alert}
+          <ToastContainer />
         </React.Fragment>
       );
   }
@@ -122,10 +183,10 @@ function mapStateToProps(state){
 };
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
-    // getPosts: dispatch(getPosts()),
-    // destroyPost: destroyPost,
-    // toggleActivePost: toggleActivePost,
-    // togglePublishPost: togglePublishPost,
+    getPackages: dispatch(getPackages()),
+    storePackage: storePackage,
+    taggleActivePackage: taggleActivePackage,
+    destroyPackage: destroyPackage,
   }, dispatch)
 };
 
