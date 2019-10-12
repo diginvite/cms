@@ -1,6 +1,7 @@
 import React from 'react';
 import { Table, Button, Icon } from 'semantic-ui-react';
 import Moment from 'react-moment';
+import {Link}  from 'react-router-dom';
 
 const PackageTable = props => {
   return(
@@ -27,7 +28,7 @@ const PackageTable = props => {
                     <Table.Cell textAlign='center'>{data.features.length}</Table.Cell>
                     <Table.Cell textAlign='center'>
                       {
-                        data.active ?
+                        data.active === 1 ?
                         <Button size="mini"  circular icon='toggle on' color='blue' onClick={() => props.onConfirm(i, data, 'toggleActive')}/>
                         :
                         <Button size="mini"  circular icon='toggle off' color='red' onClick={() => props.onConfirm(i, data, 'toggleActive')}/>
@@ -39,6 +40,9 @@ const PackageTable = props => {
                       </Moment>
                     </Table.Cell>
                     <Table.Cell textAlign='center'>
+                      <Link to={`/package/detail/${data.slug}`}>
+                      <Button size="mini" circular icon='file' color='blue'/>
+                      </Link>
                       {
                         !data.active ?
                           <Button size="mini" circular icon='trash' color='red' onClick={() => props.onConfirm(i, data, 'destroy')}/>

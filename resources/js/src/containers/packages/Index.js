@@ -3,7 +3,7 @@ import {Link}  from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter} from 'react-router-dom';
-import { Tab } from 'semantic-ui-react';
+import { Tab, Dimmer, Loader, Image, Segment  } from 'semantic-ui-react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SweetAlert from 'react-bootstrap-sweetalert';
@@ -22,7 +22,14 @@ class Index extends Component {
       description: '',
       data: [],
       alert: null,
+      isLoading: true,
     }
+  }
+
+  componentDidMount(){
+    this.props.getPackages().then(() => {
+      this.setState({isLoading: false})
+    })
   }
 
   onChange(e){
@@ -143,6 +150,16 @@ class Index extends Component {
           </Tab.Pane>,
         },
       ];
+      if (this.state.isLoading) {
+        return(
+          <Segment>
+            <Dimmer active inverted>
+              <Loader inverted>Loading</Loader>
+            </Dimmer>
+            <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
+          </Segment>
+        )
+      }
       return (
         <React.Fragment>
           <section className="content-header">
@@ -183,7 +200,7 @@ function mapStateToProps(state){
 };
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
-    getPackages: dispatch(getPackages()),
+    getPackages: getPackages,
     storePackage: storePackage,
     taggleActivePackage: taggleActivePackage,
     destroyPackage: destroyPackage,

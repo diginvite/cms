@@ -5,12 +5,19 @@ export const storePackage = (data) => {
   return (dispatch) => {
     return axios.post(`${apiUrl}/store`, data)
       .then(response => {
-        // dispatch(getBlogsActiveCompleted(response.data))
+        dispatch(storePackagesCompleted(response.data.data))
       })
       .catch(error => {
         throw(error);
       });
   };
+};
+
+export const storePackagesCompleted = (data) => {
+  return {
+    type: "STORE_PACKAGE_COMPLETED",
+    payload: data,
+  }
 };
 
 export const getPackages = () => {
@@ -70,4 +77,62 @@ export const destroyPackageCompleted = (i, data) => {
     payload: data,
     index: i
   }
+};
+
+export const getPackage = (slug) => {
+  return (dispatch) => {
+    return axios.get(`${apiUrl}/show/${slug}`)
+      .then(response => {
+        dispatch(getPackageCompleted(response.data.data))
+      })
+      .catch(error => {
+        throw(error);
+      });
+  };
+};
+
+export const getPackageCompleted = (data) => {
+  return {
+    type: "GET_PACKAGE_COMPLETED",
+    payload: data,
+  }
+};
+
+export const updatePackage = (slug, data) => {
+  return (dispatch) => {
+    return axios.post(`${apiUrl}/update/${slug}`, {
+        data: data,
+        _method: 'PUT'
+      })
+      .then(response => {
+        // dispatch(getPackageCompleted(response.data.data))
+      })
+      .catch(error => {
+        throw(error);
+      });
+  };
+};
+
+export const updatePackageCompleted = (data) => {
+  return {
+    type: "UPDATE_PACKAGE_COMPLETED",
+    payload: data,
+  }
+};
+
+export const featureSyncPackage = (slug, data) => {
+  return (dispatch) => {
+    return axios.post(`${apiUrl}/featureSync/${slug}`, {
+        data: data,
+        _method: 'PUT'
+      })
+      .then(response => {
+        console.log(data);
+        
+        // dispatch(getPackageCompleted(response.data.data))
+      })
+      .catch(error => {
+        throw(error);
+      });
+  };
 };

@@ -29,6 +29,9 @@ Route::prefix('v1/api/')->group(function () {
     Route::post('store', 'PackageController@store')->name('package.store');
     Route::get('toggleActive/{id}', 'PackageController@toggleActive')->name('package.toggleActive');
     Route::get('destroy/{id}', 'PackageController@destroy')->name('package.destroy');
+    Route::get('show/{slug}', 'PackageController@show')->name('package.show');
+    Route::put('update/{slug}', 'PackageController@update')->name('package.update');
+    Route::put('featureSync/{slug}', 'PackageController@featureSync')->name('package.featureSync');
   });
 });
 
