@@ -32,6 +32,33 @@ class PackageTransformer extends TransformerAbstract {
       ];
     });
 
+    $currentDate = date('Y-m-d');
+    $price = $package->prices()->where('date', '<=', $currentDate)->orderBy('date', 'desc')->first();
+    if ($price != null) {
+      $data["priceActive"] = [
+        "id" => $price->id,
+        "price" => $price->price,
+        "sellingPrice" => $price->selling_price,
+        "packageId" => $price->package_id,
+        "date"  => $price->date,
+        "createdAt" => $price->created_at
+      ];
+    }else{
+      $data["priceActive"] = $price;
+    }
+
+    $prices = $package->prices()->orderBy('date', 'desc')->get();
+    $data["prices"] = $prices->map(function($price) {
+      return [
+        "id" => $price->id,
+        "price" => $price->price,
+        "sellingPrice" => $price->selling_price,
+        "packageId" => $price->package_id,
+        "date"  => $price->date,
+        "createdAt" => $price->created_at
+      ];
+    });
+
     return $data;
   }
 }

@@ -12,7 +12,7 @@
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
   <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="{!! asset('AdminLTE-245/bower_components/bootstrap/dist/css/bootstrap.min.css') !!}">
+  <link rel="stylesheet" href="{!! asset('AdminLTE-245/bower_components/bootstrap/dist/css/bootstrap.css') !!}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{!! asset('AdminLTE-245/bower_components/font-awesome/css/font-awesome.min.css') !!}">
   <!-- Ionicons -->
@@ -27,7 +27,7 @@
   <!-- Pace style -->
   <link rel="stylesheet" href="{!! asset('AdminLTE-245/plugins/pace/pace.min.css') !!}">
   {{-- ajat --}}
-  <link rel="stylesheet" href="{!! asset('ajat/css/style.css') !!}">
+  {{-- <link rel="stylesheet" href="{!! asset('ajat/css/style.css') !!}"> --}}
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 

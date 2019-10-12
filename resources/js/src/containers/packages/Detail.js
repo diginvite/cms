@@ -3,7 +3,7 @@ import {Link}  from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter} from 'react-router-dom';
-import { Tab, Dimmer, Loader, Image, Segment, Grid, Divider, Header, Icon} from 'semantic-ui-react';
+import { Tab, Dimmer, Loader, Image, Segment, Grid, Divider, Header, Icon, Button} from 'semantic-ui-react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SweetAlert from 'react-bootstrap-sweetalert';
@@ -13,12 +13,15 @@ import { getPackage, updatePackage, featureSyncPackage } from '../../actions/pac
 
 import CreateForm from '../../components/packages/CreateForm';
 import Feature from '../../components/packages/Feature';
+import Price from '../../components/packages/Price';
 import Loading from '../../components/Loading';
+import PriceForm from '../../components/prices/Form';
 
 class Index extends Component {
   constructor(props){
     super(props);
     this.state = {
+      id: '',
       name: '',
       slug: this.props.match.params.slug,
       nameError: false,
@@ -28,16 +31,26 @@ class Index extends Component {
       alert: null,
       isLoading: true,
       features: [],
+      prices: [],
+      priceForm: false,
+      price: 0,
+      priceE: false,
+      priceSelling: 0,
+      priceSellingE: false,
+      priceDate: '',
+      priceDateE: false,
     }
   }
 
   componentDidMount(){
     this.props.getPackage(this.state.slug).then(() => {
       this.setState({
+        id: this.props.package.id,
         name: this.props.package.name,
         description: this.props.package.description,
         active: this.props.package.active,
         features: this.props.package.features,
+        prices: this.props.package.prices,
         isLoading: false,
       })
     })
@@ -51,6 +64,21 @@ class Index extends Component {
         this.setState({nameError: true})
       }else{
         this.setState({nameError: false})
+      }
+      if (this.state.price === '') {
+        this.setState({priceE: true})
+      }else{
+        this.setState({priceE: false})
+      }
+      if (this.state.priceSelling === '') {
+        this.setState({priceSellingE: true})
+      }else{
+        this.setState({priceSellingE: false})
+      }
+      if (this.state.priceDate === '') {
+        this.setState({priceDateE: true})
+      }else{
+        this.setState({priceDateE: false})
       }
     })
   }
@@ -103,6 +131,33 @@ class Index extends Component {
     })
   }
 
+  onPriceSubmit(e){
+    e.preventDefault();
+    if (this.state.price === '') {
+      this.setState({priceE: true})
+    }else{
+      if (this.state.priceSelling === '') {
+        this.setState({priceSellingE: true})
+      }else{
+        if (this.state.priceDate === '') {
+          this.setState({priceSellingE: true})
+        }else{
+          const data = {
+            price: this.state.price,
+            priceSelling: this.state.priceSelling,
+            date: this.state.priceDate,
+            packageId: this.state.id,
+          }
+          this.props.updatePackage(slug, data).then(() => {
+            toast.success("Data saved !", {
+              position: toast.POSITION.TOP_RIGHT
+            });
+          });
+        }
+      }
+    }
+  }
+
   render() {
     if (this.state.isLoading) {
       return(
@@ -132,6 +187,17 @@ class Index extends Component {
               onUnlimitedChange={(i, data) => this.onUnlimitedChange(i, data)}
               onSave={(i, data) => this.onSave(i, data)}
               onQuantityChange={(e, i) => this.onQuantityChange(e, i)}
+            />
+          </Tab.Pane>,
+        },
+        {
+          menuItem: { key: 'price', icon: 'money', content: 'Price' },
+          render: () => <Tab.Pane loading={false}>
+            <PriceForm
+              onHide={() => this.setState({priceForm: false})}
+            />
+            <Price
+              data={this.state.prices}
             />
           </Tab.Pane>,
         },

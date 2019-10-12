@@ -12,6 +12,8 @@ const PackageTable = props => {
             <Table.Row>
               <Table.HeaderCell textAlign='center'>No</Table.HeaderCell>
               <Table.HeaderCell textAlign='center'>Name</Table.HeaderCell>
+              <Table.HeaderCell textAlign='center'>Price</Table.HeaderCell>
+              <Table.HeaderCell textAlign='center'>Selling Price</Table.HeaderCell>
               <Table.HeaderCell textAlign='center'>Features</Table.HeaderCell>
               <Table.HeaderCell textAlign='center'>Active</Table.HeaderCell>
               <Table.HeaderCell textAlign='center'>Created at</Table.HeaderCell>
@@ -25,6 +27,20 @@ const PackageTable = props => {
                   <Table.Row key={i}>
                     <Table.Cell textAlign='center'>{i+1}</Table.Cell>
                     <Table.Cell>{data.name}</Table.Cell>
+                    <Table.Cell textAlign='right'>
+                      {
+                        data.priceActive !== null ?
+                        data.priceActive.price
+                        : null
+                      }
+                    </Table.Cell>
+                    <Table.Cell textAlign='right'>
+                      {
+                        data.priceActive !== null ?
+                        data.priceActive.sellingPrice
+                        : null
+                      }
+                    </Table.Cell>
                     <Table.Cell textAlign='center'>{data.features.length}</Table.Cell>
                     <Table.Cell textAlign='center'>
                       {
