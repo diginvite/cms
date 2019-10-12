@@ -9,7 +9,7 @@ use App\Models\Feature;
 
 class PackageController extends Controller{
   public function getData(){
-    $data = Package::paginate(10);
+    $data = Package::orderBy('active', 'desc')->orderBy('name', 'asc')->paginate(10);
     return fractal($data, new PackageTransformer())->toArray();
   }
 

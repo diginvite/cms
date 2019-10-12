@@ -28,7 +28,7 @@ const PackageTable = props => {
                     <Table.Cell textAlign='center'>{data.features.length}</Table.Cell>
                     <Table.Cell textAlign='center'>
                       {
-                        data.active === 1 ?
+                        data.active?
                         <Button size="mini"  circular icon='toggle on' color='blue' onClick={() => props.onConfirm(i, data, 'toggleActive')}/>
                         :
                         <Button size="mini"  circular icon='toggle off' color='red' onClick={() => props.onConfirm(i, data, 'toggleActive')}/>

@@ -10,6 +10,7 @@ import SweetAlert from 'react-bootstrap-sweetalert';
 
 import Table from '../../components/packages/Table';
 import CreateForm from '../../components/packages/CreateForm';
+import Loading from '../../components/Loading';
 
 import { storePackage, getPackages, taggleActivePackage, destroyPackage} from '../../actions/package-action';
 
@@ -152,12 +153,7 @@ class Index extends Component {
       ];
       if (this.state.isLoading) {
         return(
-          <Segment>
-            <Dimmer active inverted>
-              <Loader inverted>Loading</Loader>
-            </Dimmer>
-            <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
-          </Segment>
+          <Loading/>
         )
       }
       return (

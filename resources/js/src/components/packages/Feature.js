@@ -11,69 +11,14 @@ const Feature = props => {
 
   return(
     <React.Fragment>
-      {/* <Card.Group>
-      {
-        props.data.map((data, i) => {
-          return(
-            <React.Fragment>
-              <Card>
-                <Card.Content extra>
-                  <Image
-                    floated='right'
-                    size='mini'
-                    src='https://react.semantic-ui.com/images/avatar/large/steve.jpg'
-                  />
-                  <Card.Header>{data.name}</Card.Header>
-                    <Card.Meta>Type : {data.value_type ? 'Flexible' : 'Fixed'}</Card.Meta>
-                  <Card.Description>
-                    {data.description}
-                  </Card.Description>
-                </Card.Content>
-                <Card.Content extra>
-                  {
-                    data.value_type ? 
-                    <Form>
-                      {
-                        !data.detail.unlimited ? 
-                        <Form.Field>
-                        <label>Quantity</label>
-                        <input placeholder='Ex. 10' value={data.detail.quantity} onChange={(e) => props.onQuantityChange(e, i)} type="number"/>
-                        </Form.Field>
-                        : null
-                      }
-                    <Form.Field>
-                      <Checkbox label='Active' checked={data.detail.active} onChange={() => props.onActiveChange(i, data)}/>
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      <Checkbox label='Unlimited' checked={data.detail.unlimited} onChange={() => props.onUnlimitedChange(i, data)}/>
-                    </Form.Field>
-                  </Form>
-                    :
-                    <Form>
-                    <Checkbox label='Active' checked={data.detail.active} onChange={() => props.onActiveChange(i, data)}/>
-                    </Form>
-                  }
-                </Card.Content>
-                <Card.Content extra>
-                  <div className='ui two buttons'>
-                    <Button color='blue' onClick={() => props.onSave(i, data)}>
-                      <Icon name="save"/> Save
-                    </Button>
-                  </div>
-                </Card.Content>
-              </Card>
-            </React.Fragment>
-          )
-        })
-      }
-      </Card.Group> */}
       <Table>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell textAlign='center'>No</Table.HeaderCell>
             <Table.HeaderCell textAlign='center'>Name</Table.HeaderCell>
-            <Table.HeaderCell textAlign='center'>Description</Table.HeaderCell>
-            <Table.HeaderCell textAlign='center'>Quantity</Table.HeaderCell>
+            <Table.HeaderCell textAlign='center'>Type</Table.HeaderCell>
             <Table.HeaderCell textAlign='center'>Active</Table.HeaderCell>
+            <Table.HeaderCell textAlign='center'>Quantity</Table.HeaderCell>
             <Table.HeaderCell textAlign='center'>Unlimited</Table.HeaderCell>
             <Table.HeaderCell textAlign='center'>Action</Table.HeaderCell>
           </Table.Row>
@@ -83,26 +28,38 @@ const Feature = props => {
             props.data.map((data, i) => {
               return(
                 <React.Fragment>
-                <Table.Row key={i}>
+                <Table.Row key={i} disabled={!data.active}>
                   <Table.Cell textAlign='center'>{i+1}</Table.Cell>
                   <Table.Cell textAlign='center'>{data.name}</Table.Cell>
-                  <Table.Cell textAlign='center'>{data.description}</Table.Cell>
                   <Table.Cell textAlign='center'>
                     {
-                        !data.detail.unlimited ? 
-                        <Form>
-                          <Form.Field>
-                            <input placeholder='Ex. 10' value={data.detail.quantity} onChange={(e) => props.onQuantityChange(e, i)} type="number"/>
-                          </Form.Field>
-                        </Form>
-                        : "Unlimited"
+                      data.value_type ?
+                      'Flexible'
+                      : 'Fixed'
                     }
                   </Table.Cell>
                   <Table.Cell textAlign='center'>
                   <Checkbox checked={data.detail.active} onChange={() => props.onActiveChange(i, data)}/>
                   </Table.Cell>
                   <Table.Cell textAlign='center'>
-                    <Checkbox checked={data.detail.unlimited} onChange={() => props.onUnlimitedChange(i, data)}/>
+                    {
+                      data.value_type ?
+                      !data.detail.unlimited ? 
+                        <Form>
+                          <Form.Field>
+                            <input placeholder='Ex. 10' value={data.detail.quantity} onChange={(e) => props.onQuantityChange(e, i)} type="number"/>
+                          </Form.Field>
+                        </Form>
+                        : "Unlimited"
+                      : null
+                    }
+                  </Table.Cell>
+                  <Table.Cell textAlign='center'>
+                    {
+                      data.value_type ?
+                      <Checkbox checked={data.detail.unlimited} onChange={() => props.onUnlimitedChange(i, data)}/>
+                      : null
+                    }
                   </Table.Cell>
                   <Table.Cell textAlign='center'>
                     <Button size="mini" circular icon='save' color='blue' onClick={() => props.onSave(i, data)}/>

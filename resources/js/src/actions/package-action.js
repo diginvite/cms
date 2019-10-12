@@ -5,7 +5,7 @@ export const storePackage = (data) => {
   return (dispatch) => {
     return axios.post(`${apiUrl}/store`, data)
       .then(response => {
-        dispatch(storePackagesCompleted(response.data.data))
+        dispatch(storePackageCompleted(response.data.data))
       })
       .catch(error => {
         throw(error);
@@ -13,7 +13,7 @@ export const storePackage = (data) => {
   };
 };
 
-export const storePackagesCompleted = (data) => {
+export const storePackageCompleted = (data) => {
   return {
     type: "STORE_PACKAGE_COMPLETED",
     payload: data,

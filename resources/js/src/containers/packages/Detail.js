@@ -13,6 +13,7 @@ import { getPackage, updatePackage, featureSyncPackage } from '../../actions/pac
 
 import CreateForm from '../../components/packages/CreateForm';
 import Feature from '../../components/packages/Feature';
+import Loading from '../../components/Loading';
 
 class Index extends Component {
   constructor(props){
@@ -105,12 +106,7 @@ class Index extends Component {
   render() {
     if (this.state.isLoading) {
       return(
-        <Segment>
-          <Dimmer active inverted>
-            <Loader inverted>Loading</Loader>
-          </Dimmer>
-          <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
-        </Segment>
+        <Loading/>
       )
     }
 

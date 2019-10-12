@@ -21,7 +21,12 @@ Auth::routes();
 
 Route::prefix('v1/api/')->group(function () {
   Route::prefix('feature')->group(function () {
-    Route::get('index', 'FeatureController@index')->name('feature.index');
+    Route::get('getData', 'FeatureController@getData')->name('feature.getData');
+    Route::post('store', 'FeatureController@store')->name('feature.store');
+    Route::get('toggleActive/{id}', 'FeatureController@toggleActive')->name('feature.toggleActive');
+    Route::get('destroy/{id}', 'FeatureController@destroy')->name('feature.destroy');
+    Route::get('show/{slug}', 'FeatureController@show')->name('feature.show');
+    Route::put('update/{slug}', 'FeatureController@update')->name('feature.update');
   });
 
   Route::prefix('package')->group(function () {

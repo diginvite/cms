@@ -15,7 +15,8 @@ class PackageTransformer extends TransformerAbstract {
       "created_at" => $package->created_at
     ];
 
-    $data["features"] = $package->features->map(function($feature) {
+    $packages = $package->features()->orderBy('active', 'desc')->orderBy('name', 'asc')->get();
+    $data["features"] = $packages->map(function($feature) {
       return [
         "id"            => $feature->id,
         "name"          => $feature->name,
