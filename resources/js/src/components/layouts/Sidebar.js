@@ -1,16 +1,9 @@
-import React, { Component } from 'react';
-import {Link, Route}  from 'react-router-dom';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import React from 'react';
+import {Link} from 'react-router-dom';
 
-export class Sidebar extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <React.Fragment>
+const Sidebar = () => {
+  return(
+    <React.Fragment>
         <aside className="main-sidebar">
           <section className="sidebar">
             <div className="user-panel">
@@ -47,23 +40,9 @@ export class Sidebar extends Component {
           </section>
         </aside>
       </React.Fragment>
-    );
-  }
+  )
 }
 
-// function mapStateToProps(state){
-//   return {
-//     profile: state.users.profile,
-//   };
-// };
-// function mapDispatchToProps(dispatch){
-//   return bindActionCreators({
-//   }, dispatch)
-// };
-
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(Sidebar);
-
 export default Sidebar;
+
+

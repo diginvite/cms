@@ -15,9 +15,13 @@ class CreateCustomersTable extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('domain');
-            $table->text('name');
-            $table->text('description');
+            $table->string('domain');
+            $table->string('name');
+            $table->string('email')->default(NULL);
+            $table->string('phone')->default(NULL);
+            $table->string('company')->default(NULL);
+            $table->string('address')->default(NULL);
+            $table->text('description')->default(NULL);
             $table->bigInteger('package_id')->unsigned();
             $table->foreign('package_id')->references('id')->on('packages')->onDelete('cascade');
             $table->softDeletes();

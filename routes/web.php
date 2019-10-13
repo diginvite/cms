@@ -41,6 +41,14 @@ Route::prefix('v1/api/')->group(function () {
     Route::get('destroyPrice/{id}', 'PackageController@destroyPrice')->name('package.destroyPrice');
     Route::post('updatePrice', 'PackageController@updatePrice')->name('package.updatePrice');
   });
+
+  Route::prefix('customer')->group(function () {
+    Route::get('getData', 'CustomerController@getData')->name('customer.getData');
+    Route::post('store', 'CustomerController@store')->name('customer.store');
+    Route::get('toggleActive/{id}', 'CustomerController@toggleActive')->name('customer.toggleActive');
+    Route::get('destroy/{id}', 'CustomerController@destroy')->name('customer.destroy');
+    Route::get('show/{slug}', 'CustomerController@show')->name('customer.show');
+  });
 });
 
 
