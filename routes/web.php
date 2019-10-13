@@ -37,6 +37,9 @@ Route::prefix('v1/api/')->group(function () {
     Route::get('show/{slug}', 'PackageController@show')->name('package.show');
     Route::put('update/{slug}', 'PackageController@update')->name('package.update');
     Route::put('featureSync/{slug}', 'PackageController@featureSync')->name('package.featureSync');
+    Route::post('storePrice', 'PackageController@storePrice')->name('package.storePrice');
+    Route::get('destroyPrice/{id}', 'PackageController@destroyPrice')->name('package.destroyPrice');
+    Route::post('updatePrice', 'PackageController@updatePrice')->name('package.updatePrice');
   });
 });
 

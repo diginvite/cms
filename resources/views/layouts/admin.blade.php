@@ -18,7 +18,7 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="{!! asset('AdminLTE-245/bower_components/Ionicons/css/ionicons.min.css') !!}">
   <!-- Theme style -->
-  <link rel="stylesheet" href="{!! asset('AdminLTE-245/dist/css/AdminLTE.min.css') !!}">
+  <link rel="stylesheet" href="{!! asset('AdminLTE-245/dist/css/AdminLTE.css') !!}">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{!! asset('AdminLTE-245/dist/css/skins/_all-skins.min.css') !!}">
@@ -27,7 +27,7 @@
   <!-- Pace style -->
   <link rel="stylesheet" href="{!! asset('AdminLTE-245/plugins/pace/pace.min.css') !!}">
   {{-- ajat --}}
-  {{-- <link rel="stylesheet" href="{!! asset('ajat/css/style.css') !!}"> --}}
+  <link rel="stylesheet" href="{!! asset('ajat/css/style.css') !!}">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 

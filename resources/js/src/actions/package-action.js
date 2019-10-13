@@ -127,9 +127,51 @@ export const featureSyncPackage = (slug, data) => {
         _method: 'PUT'
       })
       .then(response => {
-        console.log(data);
-        
         // dispatch(getPackageCompleted(response.data.data))
+      })
+      .catch(error => {
+        throw(error);
+      });
+  };
+};
+
+export const storePrice = (data) => {
+  return (dispatch) => {
+    return axios.post(`${apiUrl}/storePrice/`, data)
+      .then(response => {
+        dispatch(storePriceCompleted(response.data))
+      })
+      .catch(error => {
+        throw(error);
+      });
+  };
+};
+
+export const storePriceCompleted = (data) => {
+  return {
+    type: "STORE_PRICE_COMPLETED",
+    payload: data,
+  }
+};
+
+export const destroyPrice = (data) => {
+  return (dispatch) => {
+    return axios.get(`${apiUrl}/destroyPrice/${data.id}`)
+      .then(response => {
+        // dispatch(destroyPriceCompleted(data))
+      })
+      .catch(error => {
+        throw(error);
+      });
+  };
+};
+
+export const updatePrice = (data) => {
+  console.log(data);
+  return (dispatch) => {
+    return axios.post(`${apiUrl}/updatePrice/`, data)
+      .then(response => {
+        // dispatch(storePriceCompleted(response.data))
       })
       .catch(error => {
         throw(error);

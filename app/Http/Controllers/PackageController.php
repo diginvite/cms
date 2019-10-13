@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Transformers\PackageTransformer;
 use App\Models\Package;
 use App\Models\Feature;
+use App\Models\Price;
 
 class PackageController extends Controller{
   public function getData(){
@@ -81,5 +82,26 @@ class PackageController extends Controller{
       ],
       false
     );
+  }
+
+  public function storePrice(Request $request){
+    $data = Price::store($request);
+    $data = [
+      "id"  => $data->id,
+      "price" => $data->price,
+      "sellingPrice"  => $data->selling_price,
+      "date" => $data->date,
+      "packageId" => $data->package_id,
+      "createdAt" => $data->created_at
+    ];
+    return $data;
+  }
+
+  public function destroyPrice($id){
+    Price::destroy($id);
+  }
+
+  public function updatePrice(Request $request){
+    Price::updateData($request);
   }
 }

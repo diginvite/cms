@@ -1,10 +1,10 @@
 import React from 'react';
-import { Button, Image, Card, Form, Checkbox, Icon, Table} from 'semantic-ui-react';
+import { Button, Image, Card, Form, Checkbox, Icon, Table, Modal} from 'semantic-ui-react';
 import Moment from 'react-moment';
 import moment from 'moment';
 import {Link}  from 'react-router-dom';
 
-const Price = props => {
+function Price(props){
   const currentDate = moment().format("YYYY-MM-DD");
   return(
     <React.Fragment>
@@ -23,12 +23,16 @@ const Price = props => {
           {
             props.data.map((data, i) => {
               return(
-                <React.Fragment>
-                <Table.Row key={i}>
+                <React.Fragment key={i}>
+                <Table.Row>
                   <Table.Cell textAlign='center'>{i+1}</Table.Cell>
                   <Table.Cell textAlign='right'>{data.price}</Table.Cell>
                   <Table.Cell textAlign='right'>{data.sellingPrice}</Table.Cell>
-                  <Table.Cell textAlign='center'>{data.date}</Table.Cell>
+                  <Table.Cell textAlign='center'>
+                      <Moment format="dddd, D MMM. YYYY" >
+                        {data.date}
+                      </Moment>
+                  </Table.Cell>
                   <Table.Cell textAlign='center'>
                       <Moment format="dddd, D MMM. YYYY" >
                         {data.createdAt}
@@ -37,7 +41,10 @@ const Price = props => {
                   <Table.Cell textAlign='center'>
                     {
                       data.date > currentDate ?
-                      <Button size="mini" circular icon='edit' color='blue' onClick={() => props.onSave(i, data)}/>
+                      <React.Fragment>
+                        <Button size="mini" circular icon='edit' color='blue' onClick={() => props.onEdit(i, data)}/>
+                        <Button size="mini" circular icon='trash' color='red' onClick={() => props.onDelete(i, data, 'price')}/>
+                      </React.Fragment>
                       : null
                     }
                   </Table.Cell>

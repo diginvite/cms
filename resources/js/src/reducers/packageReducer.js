@@ -24,6 +24,10 @@ export default function packageReducer(state= initialState, action) {
           }
         }
       });
+    case "STORE_PRICE_COMPLETED":
+      var packageTemp = state.package;
+      packageTemp["prices"].push(action.payload);
+      return {...state, package: packageTemp};
     default:
       return state;
   }

@@ -27,8 +27,8 @@ const Feature = props => {
           {
             props.data.map((data, i) => {
               return(
-                <React.Fragment>
-                <Table.Row key={i} disabled={!data.active}>
+                <React.Fragment key={i}>
+                <Table.Row  disabled={!data.active}>
                   <Table.Cell textAlign='center'>{i+1}</Table.Cell>
                   <Table.Cell textAlign='center'>{data.name}</Table.Cell>
                   <Table.Cell textAlign='center'>

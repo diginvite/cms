@@ -3,18 +3,19 @@ import {Link}  from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter} from 'react-router-dom';
-import { Tab, Dimmer, Loader, Image, Segment, Grid, Divider, Header, Icon, Button} from 'semantic-ui-react';
+import { Tab, Dimmer, Loader, Image, Segment, Grid, Divider, Header, Icon, Button, Modal} from 'semantic-ui-react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SweetAlert from 'react-bootstrap-sweetalert';
 import update from 'react-addons-update';
+import moment from 'moment';
 
-import { getPackage, updatePackage, featureSyncPackage } from '../../actions/package-action';
+import { getPackage, updatePackage, featureSyncPackage, storePrice, destroyPrice, updatePrice} from '../../actions/package-action';
 
 import CreateForm from '../../components/packages/CreateForm';
 import Feature from '../../components/packages/Feature';
-import Price from '../../components/packages/Price';
 import Loading from '../../components/Loading';
+import Price from '../../components/prices/Table';
 import PriceForm from '../../components/prices/Form';
 
 class Index extends Component {
@@ -33,12 +34,17 @@ class Index extends Component {
       features: [],
       prices: [],
       priceForm: false,
+      priceFormEdit: false,
+      priceId: null,
       price: 0,
       priceE: false,
       priceSelling: 0,
       priceSellingE: false,
       priceDate: '',
       priceDateE: false,
+      alert: false,
+      alertContent: null,
+      index: null,
     }
   }
 
@@ -56,30 +62,42 @@ class Index extends Component {
     })
   }
 
-  onChange(e){
+  onChange(e, {name, value}){
     this.setState({
-      [e.target.name]: e.target.value 
+      [name]: value
     }, () => {
-      if (this.state.name === '') {
-        this.setState({nameError: true})
-      }else{
-        this.setState({nameError: false})
+      if (name === 'name') {
+        if (this.state.name === '') {
+          this.setState({nameError: true})
+        }else{
+          this.setState({nameError: false})
+        }
       }
-      if (this.state.price === '') {
-        this.setState({priceE: true})
-      }else{
-        this.setState({priceE: false})
+
+      if (name === 'price') {
+        if (this.state.price === '') {
+          this.setState({priceE: true})
+        }else{
+          this.setState({priceE: false})
+        }
       }
-      if (this.state.priceSelling === '') {
-        this.setState({priceSellingE: true})
-      }else{
-        this.setState({priceSellingE: false})
+
+      if (name === 'priceDate') {
+        if (this.state.priceDate === '') {
+          this.setState({priceDateE: true})
+        }else{
+          this.setState({priceDateE: false})
+        }
       }
-      if (this.state.priceDate === '') {
-        this.setState({priceDateE: true})
-      }else{
-        this.setState({priceDateE: false})
+
+      if (name === 'priceSelling') {
+        if (this.state.priceSelling === '') {
+          this.setState({priceSellingE: true})
+        }else{
+          this.setState({priceSellingE: false})
+        }
       }
+
     })
   }
 
@@ -131,31 +149,99 @@ class Index extends Component {
     })
   }
 
-  onPriceSubmit(e){
-    e.preventDefault();
-    if (this.state.price === '') {
+  onPriceSubmit(){
+    const currentDate = moment().format("YYYY-MM-DD");
+    if (this.state.price <= 0) {
       this.setState({priceE: true})
     }else{
-      if (this.state.priceSelling === '') {
+      if (this.state.priceSelling <= 0) {
         this.setState({priceSellingE: true})
       }else{
-        if (this.state.priceDate === '') {
-          this.setState({priceSellingE: true})
+        if (this.state.priceDate === '' || this.state.priceDate <= currentDate) {
+          this.setState({priceDateE: true})
         }else{
           const data = {
             price: this.state.price,
-            priceSelling: this.state.priceSelling,
+            sellingPrice: this.state.priceSelling,
             date: this.state.priceDate,
             packageId: this.state.id,
           }
-          this.props.updatePackage(slug, data).then(() => {
+          this.props.storePrice(data).then(() => {
             toast.success("Data saved !", {
               position: toast.POSITION.TOP_RIGHT
             });
+            this.setState({price: 0, priceSelling: 0, prices: this.props.package.prices})
           });
         }
       }
     }
+  }
+
+  onConfrim(i, data, flag){
+    const alertContent = () => {
+      return(
+        <Modal size="tiny" open={true}>
+        <Modal.Header>Delete Data</Modal.Header>
+        <Modal.Content>
+          <p>Are you sure you want to delete this data</p>
+        </Modal.Content>
+        <Modal.Actions>
+          <Button size="tiny" onClick={() => this.setState({alertContent: null})}><Icon name="times circle"/>Cancel</Button>
+          {
+            flag === 'price' ?
+            <Button size="tiny" onClick={() => this.onDeletePrice(data)} primary><Icon name="check circle"/>Yes</Button>
+            :null
+          }
+        </Modal.Actions>
+      </Modal>
+      )
+    }
+    this.setState({alertContent: alertContent()})
+  }
+
+  onDeletePrice(data){
+    this.props.destroyPrice(data).then(() => {
+      var prices = this.state.prices;
+      var pricesFiltered = prices.filter(price => price.id != data.id);
+      this.props.destroyPrice(data).then(() => {
+        toast.success("Data saved !", {
+          position: toast.POSITION.TOP_RIGHT
+        });
+        this.setState({prices: pricesFiltered, alertContent: null});
+      })
+    })
+  }
+
+  onEditPrice(i, data){
+    const date = moment().format("DD/MM/YYYY");
+    this.setState({
+      index: i,
+      priceId: data.id,
+      price: data.price,
+      priceSelling: data.sellingPrice,
+      priceDate: data.date,
+      priceFormEdit: true,
+    });
+  }
+
+  onUpdatePrice(){
+    const data = {
+      id: this.state.priceId,
+      date: this.state.priceDate,
+      price: this.state.price,
+      sellingPrice: this.state.priceSelling,
+    }
+    this.props.updatePrice(data).then(() => {
+      const i = this.state.index;
+      const prices = this.state.prices;
+      prices[i]["date"] = this.state.priceDate;
+      prices[i]["price"]  = this.state.price;
+      prices[i]["sellingPrice"] = this.state.priceSelling;
+      this.setState({prices: prices, priceFormEdit: false})
+      toast.success("Data updated !", {
+        position: toast.POSITION.TOP_RIGHT
+      });
+    })
   }
 
   render() {
@@ -193,11 +279,11 @@ class Index extends Component {
         {
           menuItem: { key: 'price', icon: 'money', content: 'Price' },
           render: () => <Tab.Pane loading={false}>
-            <PriceForm
-              onHide={() => this.setState({priceForm: false})}
-            />
+            <Button primary size="small" onClick={() => this.setState({priceForm: !this.state.priceForm})}><Icon name="plus circle"/> Add</Button>
             <Price
               data={this.state.prices}
+              onDelete={(i, data, flag) => this.onConfrim(i, data, flag)}
+              onEdit={(i, data) => this.onEditPrice(i, data)}
             />
           </Tab.Pane>,
         },
@@ -230,8 +316,33 @@ class Index extends Component {
               </div>
             </div>
           </section>
-          {this.state.alert}
+          {/* {this.state.alert} */}
+          {this.state.alertContent}
           <ToastContainer />
+          <PriceForm
+              onHide={() => this.setState({priceForm: false})}
+              onSubmit={() => this.onPriceSubmit()}
+              onChange={(e, meta) => this.onChange(e, meta)}
+              price={this.state.price}
+              priceE={this.state.priceE}
+              priceSelling={this.state.priceSelling}
+              priceSellingE={this.state.priceSellingE}
+              priceDate={this.state.priceDate}
+              priceDateE={this.state.priceDateE}
+              open={this.state.priceForm}
+            />
+            <PriceForm
+              onHide={() => this.setState({priceFormEdit: false})}
+              onSubmit={() => this.onUpdatePrice()}
+              onChange={(e, meta) => this.onChange(e, meta)}
+              price={this.state.price}
+              priceE={this.state.priceE}
+              priceSelling={this.state.priceSelling}
+              priceSellingE={this.state.priceSellingE}
+              priceDate={this.state.priceDate}
+              priceDateE={this.state.priceDateE}
+              open={this.state.priceFormEdit}
+            />
         </React.Fragment>
       );
   }
@@ -247,6 +358,9 @@ function mapDispatchToProps(dispatch){
     getPackage: getPackage,
     updatePackage: updatePackage,
     featureSyncPackage: featureSyncPackage,
+    storePrice: storePrice,
+    destroyPrice: destroyPrice,
+    updatePrice: updatePrice,
   }, dispatch)
 };
 
