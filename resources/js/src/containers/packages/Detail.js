@@ -17,6 +17,7 @@ import Feature from '../../components/packages/Feature';
 import Loading from '../../components/Loading';
 import Price from '../../components/prices/Table';
 import PriceForm from '../../components/prices/Form';
+import ModalConfirm from '../../components/Modals/Confirm';
 
 class Index extends Component {
   constructor(props){
@@ -42,6 +43,7 @@ class Index extends Component {
       priceSellingE: false,
       priceDate: '',
       priceDateE: false,
+      priceAlert: false,
       alert: false,
       alertContent: null,
       index: null,
@@ -180,20 +182,14 @@ class Index extends Component {
   onConfrim(i, data, flag){
     const alertContent = () => {
       return(
-        <Modal size="tiny" open={true}>
-        <Modal.Header>Delete Data</Modal.Header>
-        <Modal.Content>
-          <p>Are you sure you want to delete this data</p>
-        </Modal.Content>
-        <Modal.Actions>
-          <Button size="tiny" onClick={() => this.setState({alertContent: null})}><Icon name="times circle"/>Cancel</Button>
-          {
-            flag === 'price' ?
-            <Button size="tiny" onClick={() => this.onDeletePrice(data)} primary><Icon name="check circle"/>Yes</Button>
-            :null
-          }
-        </Modal.Actions>
-      </Modal>
+        <ModalConfirm
+          data={data}
+          // open={this.state.priceAlert}
+          header="Delete Data"
+          content="Are you sure to delete this data?"
+          onHide={() => {this.setState({priceAlert: false, alertContent: null})}}
+          onAction={(data) => this.onDeletePrice(data)}
+        />
       )
     }
     this.setState({alertContent: alertContent()})

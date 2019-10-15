@@ -14,11 +14,6 @@ class Package extends Model{
   }
 
   public function prices(){
-    return $this->hasMany(Price::class);
+    return $this->morphMany(Price::class, 'priceable');
   }
-
-  // public function priceActive(){
-  //   $currentDate = date('Y-m-d');
-  //   return $this->hasMany(Price::class)->where('date', '>=', $currentDate)->orderBy('date', 'asc')->first();
-  // }
 }

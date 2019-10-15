@@ -31,6 +31,7 @@ Route::prefix('v1/api/')->group(function () {
 
   Route::prefix('package')->group(function () {
     Route::get('getData', 'PackageController@getData')->name('package.getData');
+    Route::get('getActiveData', 'PackageController@getActiveData')->name('package.getActiveData');
     Route::post('store', 'PackageController@store')->name('package.store');
     Route::get('toggleActive/{id}', 'PackageController@toggleActive')->name('package.toggleActive');
     Route::get('destroy/{id}', 'PackageController@destroy')->name('package.destroy');
@@ -42,12 +43,12 @@ Route::prefix('v1/api/')->group(function () {
     Route::post('updatePrice', 'PackageController@updatePrice')->name('package.updatePrice');
   });
 
-  Route::prefix('customer')->group(function () {
-    Route::get('getData', 'CustomerController@getData')->name('customer.getData');
-    Route::post('store', 'CustomerController@store')->name('customer.store');
-    Route::get('toggleActive/{id}', 'CustomerController@toggleActive')->name('customer.toggleActive');
-    Route::get('destroy/{id}', 'CustomerController@destroy')->name('customer.destroy');
-    Route::get('show/{slug}', 'CustomerController@show')->name('customer.show');
+  Route::prefix('order')->group(function () {
+    Route::get('getData', 'OrderController@getData')->name('order.getData');
+    Route::post('store', 'OrderController@store')->name('order.store');
+    Route::get('toggleActive/{id}', 'OrderController@toggleActive')->name('order.toggleActive');
+    Route::get('destroy/{id}', 'OrderController@destroy')->name('order.destroy');
+    Route::get('show/{slug}', 'OrderController@show')->name('order.show');
   });
 });
 

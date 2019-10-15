@@ -32,6 +32,18 @@ export const getPackages = () => {
   };
 };
 
+export const getActivePackages = () => {
+  return (dispatch) => {
+    return axios.get(`${apiUrl}/getActiveData`)
+      .then(response => {
+        dispatch(getPackagesCompleted(response.data))
+      })
+      .catch(error => {
+        throw(error);
+      });
+  };
+};
+
 export const getPackagesCompleted = (data) => {
   return {
     type: "GET_PACKAGES_COMPLETED",

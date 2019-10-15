@@ -9,15 +9,8 @@ class Price extends Model{
   use SoftDeletes;
   protected $guarded = ['id'];
 
-  public static function store($request){
-    // insert data to db
-    $data = Self::create([
-      'price'         => $request->price,
-      'selling_price' => $request->sellingPrice,
-      'date'          => $request->date,
-      'package_id'    => $request->packageId,
-    ]);
-    return $data;
+  public function priceable(){
+    return $this->morphTo();
   }
 
   public static function destroy($id){

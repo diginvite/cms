@@ -7,7 +7,8 @@ import FeatureIndex from './containers/features/Index';
 import FeatureDetail from './containers/features/Deatil';
 import PackageIndex from './containers/packages/Index';
 import PackageDetail from './containers/packages/Detail';
-import CustomerIndex from './containers/customers/Index';
+import OrderIndex from './containers/orders/Index';
+import OrderDetail from './containers/orders/Detail';
 
 class App extends Component {
   render() {
@@ -21,7 +22,8 @@ class App extends Component {
               <Route exact path="/feature/detail/:slug" component={FeatureDetail}/>
               <Route exact path="/package" component={PackageIndex}/>
               <Route exact path="/package/detail/:slug" component={PackageDetail}/>
-              <Route exact path="/customer" component={CustomerIndex}/>
+              <Route exact path="/order" component={OrderIndex}/>
+              <Route exact path="/order/detail/:slug" component={OrderDetail}/>
             </Layout>
           </Switch>
           </BrowserRouter>

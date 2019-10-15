@@ -14,6 +14,11 @@ class PackageController extends Controller{
     return fractal($data, new PackageTransformer())->toArray();
   }
 
+  public function getActiveData(){
+    $data = Package::where('active', 1)->orderBy('active', 'desc')->orderBy('name', 'asc')->paginate(10);
+    return fractal($data, new PackageTransformer())->toArray();
+  }
+
   public function store(Request $request){
     // validation data
     $this->validate($request, [
@@ -85,13 +90,18 @@ class PackageController extends Controller{
   }
 
   public function storePrice(Request $request){
-    $data = Price::store($request);
+    $package = Package::find($request->packageId);	
+    $price = new Price;
+    $price->price = $request->price;
+    $price->selling_price = $request->sellingPrice;
+    $price->date = $request->date;
+    $data = $package->prices()->save($price);
     $data = [
       "id"  => $data->id,
       "price" => $data->price,
       "sellingPrice"  => $data->selling_price,
       "date" => $data->date,
-      "packageId" => $data->package_id,
+      "packageId" => $data->priceable_id,
       "createdAt" => $data->created_at
     ];
     return $data;

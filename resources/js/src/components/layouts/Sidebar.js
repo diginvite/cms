@@ -28,8 +28,9 @@ const Sidebar = () => {
                 <Link to="/package"><i className="fa fa-gift"></i> <span>Package</span> </Link>
               </li>
               <li className="header">Menu</li>
-              <li><Link to="/customer">
-                <i className="fa fa-users"></i> <span>Customer</span> </Link>
+              <li>
+                <Link to="/order">
+                <i className="fa fa-money"></i> <span>Order</span> </Link>
               </li>
               <li className="header">Site</li>
               <li>
