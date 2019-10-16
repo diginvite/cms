@@ -12,6 +12,7 @@ import Table from '../../components/orders/Table';
 import CreateForm from '../../components/orders/Form';
 import Loading from '../../components/Loading';
 import ModalConfirm from '../../components/Modals/Confirm';
+import Couple from './Couple';
 
 import { storeOrder, getOrders, toggleActiveOrder, destroyOrder, getOrder } from '../../actions/order-action';
 import { getActivePackages } from '../../actions/package-action';
@@ -222,6 +223,54 @@ class Detail extends Component {
               onChange={(e, meta) => this.onChange(e, meta)}
               onSubmit={(e) => this.onSubmit(e)}
             />
+          </Tab.Pane>,
+        },
+        {
+          menuItem: { key: 'couple', icon: 'user', content: 'Couple' },
+          render: () => <Tab.Pane loading={false}>
+            <Couple/>
+          </Tab.Pane>,
+        },
+        {
+          menuItem: { key: 'event', icon: 'building', content: 'Event' },
+          render: () => <Tab.Pane loading={false}>
+            Event
+          </Tab.Pane>,
+        },
+        {
+          menuItem: { key: 'location', icon: 'map marker alternate', content: 'Location' },
+          render: () => <Tab.Pane loading={false}>
+            Location
+          </Tab.Pane>,
+        },
+        {
+          menuItem: { key: 'cover', icon: 'images', content: 'Cover' },
+          render: () => <Tab.Pane loading={false}>
+            Cover
+          </Tab.Pane>,
+        },
+        {
+          menuItem: { key: 'image', icon: 'images', content: 'Gallery' },
+          render: () => <Tab.Pane loading={false}>
+            Galerry
+          </Tab.Pane>,
+        },
+        {
+          menuItem: { key: 'music', icon: 'music', content: 'Music' },
+          render: () => <Tab.Pane loading={false}>
+            Music
+          </Tab.Pane>,
+        },
+        {
+          menuItem: { key: 'invitation', icon: 'envelope', content: 'Invitation' },
+          render: () => <Tab.Pane loading={false}>
+            Invitation
+          </Tab.Pane>,
+        },
+        {
+          menuItem: { key: 'guest', icon: 'users', content: 'Guest' },
+          render: () => <Tab.Pane loading={false}>
+            Music
           </Tab.Pane>,
         },
       ];

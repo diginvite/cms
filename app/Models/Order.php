@@ -12,4 +12,8 @@ class Order extends Model{
   public function package(){
     return $this->belongsTo(Package::class);
   }
+
+  public function couples(){
+    return $this->hasMany(Couple::class);
+  }
 }

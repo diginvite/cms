@@ -26,15 +26,21 @@ class OrderTransformer extends TransformerAbstract {
       ]
     ];
 
-    // $data["packages"] = $feature->packages->map(function($feature) {
-    //   return [
-    //     "id"            => $feature->id,
-    //     "name"          => $feature->name,
-    //     "description"   => $feature->description,
-    //     "active"        => $feature->active,
-    //     "created_at"    => $feature->created_at
-    //   ];
-    // });
+    $data["couples"] = $order->couples->map(function($couple) {
+      return [
+        "id"            => $couple->id,
+        "image"         => $couple->image,
+        "firstDegree"   => $couple->first_degree,
+        "name"          => $couple->name,
+        "lastDegree"    => $couple->last_degree,
+        "father"        => $couple->father,
+        "mother"        => $couple->mother,
+        "child"         => $couple->child,
+        "description"   => $couple->description,
+        "active"        => $couple->active,
+        "createdAt"     => $couple->created_at
+      ];
+    });
 
     return $data;
   }

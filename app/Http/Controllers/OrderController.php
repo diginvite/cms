@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\Couple;
 use App\Transformers\OrderTransformer;
 
 class OrderController extends Controller{
@@ -60,6 +61,29 @@ class OrderController extends Controller{
     $data->company = $request->data["company"];
     $data->address = $request->data["address"];
     $data->domain = $request->data["domain"];
+    $data->save();
+  }
+
+  public function storeCouple(Request $request){
+    $price = Couple::store($request);
+    $order = Order::find($request->orderId);
+    return $this->show($order->domain);
+  }
+
+  public function destroyCouple($id){
+    Couple::find($id)->delete();
+  }
+
+  public function updateCouple(Request $request, $id){
+    $data = Couple::find($id);
+    $data->image = $request->data["image"];
+    $data->first_degree = $request->data["firstDegree"];
+    $data->name = $request->data["name"];
+    $data->last_degree = $request->data["lastDegree"];
+    $data->father = $request->data["father"];
+    $data->mother = $request->data["mother"];
+    $data->child = $request->data["child"];
+    $data->description = $request->data["description"];
     $data->save();
   }
 }

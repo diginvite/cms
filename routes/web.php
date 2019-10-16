@@ -49,6 +49,10 @@ Route::prefix('v1/api/')->group(function () {
     Route::get('toggleActive/{id}', 'OrderController@toggleActive')->name('order.toggleActive');
     Route::get('destroy/{id}', 'OrderController@destroy')->name('order.destroy');
     Route::get('show/{slug}', 'OrderController@show')->name('order.show');
+    // price
+    Route::post('storeCouple', 'OrderController@storeCouple')->name('order.storeCouple');
+    Route::get('destroyCouple/{id}', 'OrderController@destroyCouple')->name('order.destroyCouple');
+    Route::put('updateCouple/{id}', 'OrderController@updateCouple')->name('feature.updateCouple');
   });
 });
 

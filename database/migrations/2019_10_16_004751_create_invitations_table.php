@@ -20,6 +20,7 @@ class CreateInvitationsTable extends Migration
             $table->string('first_degree')->default(NULL);
             $table->string('last_degree')->default(NULL);
             $table->string('company')->default(NULL);
+            $table->string('phone')->default(NULL);
             $table->boolean('active')->default(1);
             $table->bigInteger('order_id')->unsigned();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');

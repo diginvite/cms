@@ -112,3 +112,41 @@ export const updateOrder = (slug, data) => {
       });
   };
 };
+
+export const storeCouple = (data) => {
+  return (dispatch) => {
+    return axios.post(`${apiUrl}/storeCouple`, data)
+      .then(response => {
+        dispatch(getOrderCompleted(response.data.data));
+      })
+      .catch(error => {
+        throw(error);
+      });
+  };
+};
+
+export const destroyCouple = (data) => {
+  return (dispatch) => {
+    return axios.get(`${apiUrl}/destroyCouple/${data.id}`)
+      .then(response => {
+      })
+      .catch(error => {
+        throw(error);
+      });
+  };
+};
+
+export const updateCouple = (data) => {
+  return (dispatch) => {
+    return axios.post(`${apiUrl}/updateCouple/${data.id}`, {
+        data: data,
+        _method: 'PUT'
+      })
+      .then(response => {
+        // dispatch(getPackageCompleted(response.data.data))
+      })
+      .catch(error => {
+        throw(error);
+      });
+  };
+};

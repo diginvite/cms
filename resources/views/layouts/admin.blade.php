@@ -28,6 +28,8 @@
   <link rel="stylesheet" href="{!! asset('AdminLTE-245/plugins/pace/pace.min.css') !!}">
   {{-- ajat --}}
   <link rel="stylesheet" href="{!! asset('ajat/css/style.css') !!}">
+      {{--  cloudinary  --}}
+    <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>  
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 
