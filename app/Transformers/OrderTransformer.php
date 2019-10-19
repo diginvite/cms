@@ -42,31 +42,44 @@ class OrderTransformer extends TransformerAbstract {
       ];
     });
 
-    $data["events"] = $order->events->map(function($data) {
+    $data["events"] = $order->events->map(function($event) {
       return [
-        "id"            => $data->id,
-        "name"          => $data->name,
-        "address"       => $data->address,
-        "startDate"     => $data->start_date,
-        "endDate"       => $data->end_date,
-        "location"      => $data->location,
-        "lat"           => $data->lat,
-        "long"          => $data->long,
-        "description"   => $data->description,
-        "active"        => $data->active,
-        "createdAt"     => $data->created_at
+        "id"            => $event->id,
+        "name"          => $event->name,
+        "address"       => $event->address,
+        "startDate"     => $event->start_date,
+        "endDate"       => $event->end_date,
+        "location"      => $event->location,
+        "lat"           => $event->lat,
+        "long"          => $event->long,
+        "description"   => $event->description,
+        "active"        => $event->active,
+        "createdAt"     => $event->created_at
       ];
     });
 
-    $data["covers"] = $order->files->where('type', 'cover')->map(function($data) {
+    $data["covers"] = $order->files->where('type', 'cover')->map(function($order) {
       return [
-        "id"            => $data->id,
-        "path"          => $data->path,
-        "type"          => $data->type,
-        "description"   => $data->description,
-        "createdAt"     => $data->created_at
+        "id"            => $order->id,
+        "path"          => $order->path,
+        "type"          => $order->type,
+        "description"   => $order->description,
+        "createdAt"     => $order->created_at
       ];
     });
+
+    $data["galleries"] = [];
+    $galleries = $order->files->where('type', "gallery");
+    foreach ($galleries as $gallery) {
+      $data["galleries"][] = [
+        "id"            => $gallery->id,
+        "path"          => $gallery->path,
+        "type"          => $gallery->type,
+        "description"   => $gallery->description,
+        "createdAt"     => $gallery->created_at
+      ];
+    }
+
 
     return $data;
   }

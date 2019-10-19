@@ -15,6 +15,7 @@ import ModalConfirm from '../../components/Modals/Confirm';
 import Couple from './Couple';
 import Event from './Event';
 import Cover from './Cover';
+import Gallery from './Gallery';
 
 import { storeOrder, getOrders, toggleActiveOrder, destroyOrder, getOrder } from '../../actions/order-action';
 import { getActivePackages } from '../../actions/package-action';
@@ -248,7 +249,7 @@ class Detail extends Component {
         {
           menuItem: { key: 'image', icon: 'images', content: 'Gallery' },
           render: () => <Tab.Pane loading={false}>
-            Galerry
+            <Gallery/>
           </Tab.Pane>,
         },
         {

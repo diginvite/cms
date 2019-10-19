@@ -12,7 +12,7 @@ import ImageForm from '../../components/images/Form';
 import ImageList from '../../components/images/List';
 import ModalConfirm from '../../components/Modals/Confirm';
 
-class Cover extends Component{
+class Gallery extends Component{
   constructor(props){
     super(props);
     this.state = {
@@ -29,7 +29,7 @@ class Cover extends Component{
   }
 
   componentDidMount(){
-    this.setState({images: this.props.order.covers})
+    this.setState({images: this.props.order.galleries})
   }
 
   onChange(e, {name, value}){
@@ -64,13 +64,13 @@ class Cover extends Component{
         orderId: this.props.order.id,
         path: this.state.image,
         description: this.state.description,
-        type: 'cover',
+        type: 'gallery',
       }
       this.props.storeFile(data).then(() => {
         this.setState({
           image: '',
           description: '',
-          images: this.props.order.covers
+          images: this.props.order.galleries
         });
         toast.success("Data saved !", {
           position: toast.POSITION.TOP_RIGHT
@@ -213,4 +213,4 @@ function mapDispatchToProps(dispatch){
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRouter(Cover));
+)(withRouter(Gallery));
