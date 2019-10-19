@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\File;
 use App\Models\Couple;
 use App\Models\Event;
 use App\Transformers\OrderTransformer;
@@ -109,5 +110,26 @@ class OrderController extends Controller{
 
   public function destroyEvent($id){
     Event::find($id)->delete();
+  }
+
+  public function storeFile(Request $request){
+    $order = Order::find($request->orderId);	
+    $file = new File;
+    $file->path = $request->path;
+    $file->description = $request->description;
+    $file->type = $request->type;
+    $data = $order->files()->save($file);
+    return $this->show($order->domain);
+  }
+
+  public function destroyFile($id){
+    File::find($id)->delete();
+  }
+
+  public function updateFile(Request $request, $id){
+    $data = File::find($id);
+    $data->path = $request->data["path"];
+    $data->description = $request->data["description"];
+    $data->save();
   }
 }

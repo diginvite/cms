@@ -191,8 +191,6 @@ class Event extends Component{
   }
 
   onDestroy(data){
-    console.log(data);
-    
     this.props.destroyEvent(data).then(() => {
       const events = this.state.events.filter(function(couple) {
         return couple.id !== data.id
@@ -209,7 +207,7 @@ class Event extends Component{
       <React.Fragment>
         <Grid columns={2} style={{height: '500px'}}>
           <Grid.Column>
-            <Button type='submit' primary size="small" onClick={() => this.setState({form: true})}><Icon name="plus circle" /> Add</Button>
+            <Button primary size="small" onClick={() => this.setState({form: true})}><Icon name="plus circle" /> Add</Button>
             <EventList
               data={this.state.events}
               onAction={(i, data, flag) => this.onAction(i, data, flag)}

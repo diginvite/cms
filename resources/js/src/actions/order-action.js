@@ -188,3 +188,41 @@ export const updateEvent = (data) => {
       });
   };
 };
+
+export const storeFile = (data) => {
+  return (dispatch) => {
+    return axios.post(`${apiUrl}/storeFile`, data)
+      .then(response => {
+        dispatch(getOrderCompleted(response.data.data));
+      })
+      .catch(error => {
+        throw(error);
+      });
+  };
+};
+
+export const destroyFile = (data) => {
+  return (dispatch) => {
+    return axios.get(`${apiUrl}/destroyFile/${data.id}`)
+      .then(response => {
+      })
+      .catch(error => {
+        throw(error);
+      });
+  };
+};
+
+export const updateFile = (data) => {
+  return (dispatch) => {
+    return axios.post(`${apiUrl}/updateFile/${data.id}`, {
+        data: data,
+        _method: 'PUT'
+      })
+      .then(response => {
+        // dispatch(getPackageCompleted(response.data.data))
+      })
+      .catch(error => {
+        throw(error);
+      });
+  };
+};

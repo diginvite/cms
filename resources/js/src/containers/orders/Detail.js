@@ -14,6 +14,7 @@ import Loading from '../../components/Loading';
 import ModalConfirm from '../../components/Modals/Confirm';
 import Couple from './Couple';
 import Event from './Event';
+import Cover from './Cover';
 
 import { storeOrder, getOrders, toggleActiveOrder, destroyOrder, getOrder } from '../../actions/order-action';
 import { getActivePackages } from '../../actions/package-action';
@@ -235,14 +236,13 @@ class Detail extends Component {
         {
           menuItem: { key: 'event', icon: 'building', content: 'Event' },
           render: () => <Tab.Pane loading={false}>
-            <Event
-            />
+            <Event/>
           </Tab.Pane>,
         },
         {
           menuItem: { key: 'cover', icon: 'images', content: 'Cover' },
           render: () => <Tab.Pane loading={false}>
-            Cover
+            <Cover/>
           </Tab.Pane>,
         },
         {

@@ -20,4 +20,12 @@ class Order extends Model{
   public function events(){
     return $this->hasMany(Event::class);
   }
+
+  public function images(){
+    return $this->morphMany(Image::class, 'imageable');
+  }
+
+  public function files(){
+    return $this->morphMany(File::class, 'fileable');
+  }
 }

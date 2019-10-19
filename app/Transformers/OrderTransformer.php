@@ -46,14 +46,24 @@ class OrderTransformer extends TransformerAbstract {
       return [
         "id"            => $data->id,
         "name"          => $data->name,
-        "address"    => $data->address,
-        "startDate"        => $data->start_date,
-        "endDate"        => $data->end_date,
-        "location"         => $data->location,
-        "lat"   => $data->lat,
-        "long"   => $data->long,
-        "description" => $data->description,
+        "address"       => $data->address,
+        "startDate"     => $data->start_date,
+        "endDate"       => $data->end_date,
+        "location"      => $data->location,
+        "lat"           => $data->lat,
+        "long"          => $data->long,
+        "description"   => $data->description,
         "active"        => $data->active,
+        "createdAt"     => $data->created_at
+      ];
+    });
+
+    $data["covers"] = $order->files->where('type', 'cover')->map(function($data) {
+      return [
+        "id"            => $data->id,
+        "path"          => $data->path,
+        "type"          => $data->type,
+        "description"   => $data->description,
         "createdAt"     => $data->created_at
       ];
     });

@@ -19,8 +19,8 @@ class CreateFilesTable extends Migration
             $table->text('description')->default(NULL);
             $table->text('type');
             $table->boolean('active')->default(1);
-            $table->bigInteger('order_id')->unsigned();
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+            $table->bigInteger('fileable_id');
+            $table->string('fileable_type');
             $table->softDeletes();
             $table->timestamps();
         });
