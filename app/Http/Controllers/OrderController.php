@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Couple;
+use App\Models\Event;
 use App\Transformers\OrderTransformer;
 
 class OrderController extends Controller{
@@ -85,5 +86,28 @@ class OrderController extends Controller{
     $data->child = $request->data["child"];
     $data->description = $request->data["description"];
     $data->save();
+  }
+
+  public function storeEvent(Request $request){
+    $event = Event::store($request);
+    $order = Order::find($request->orderId);
+    return $this->show($order->domain);
+  }
+
+  public function updateEvent(Request $request, $id){
+    $data = Event::find($id);
+    $data->name = $request->data["name"];
+    $data->start_date = $request->data["startDate"];
+    $data->end_date = $request->data["endDate"];
+    $data->address = $request->data["address"];
+    $data->location = $request->data["location"];
+    $data->lat = $request->data["lat"];
+    $data->long = $request->data["long"];
+    $data->description = $request->data["description"];
+    $data->save();
+  }
+
+  public function destroyEvent($id){
+    Event::find($id)->delete();
   }
 }

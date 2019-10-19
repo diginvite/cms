@@ -13,6 +13,7 @@ import CreateForm from '../../components/orders/Form';
 import Loading from '../../components/Loading';
 import ModalConfirm from '../../components/Modals/Confirm';
 import Couple from './Couple';
+import Event from './Event';
 
 import { storeOrder, getOrders, toggleActiveOrder, destroyOrder, getOrder } from '../../actions/order-action';
 import { getActivePackages } from '../../actions/package-action';
@@ -234,13 +235,8 @@ class Detail extends Component {
         {
           menuItem: { key: 'event', icon: 'building', content: 'Event' },
           render: () => <Tab.Pane loading={false}>
-            Event
-          </Tab.Pane>,
-        },
-        {
-          menuItem: { key: 'location', icon: 'map marker alternate', content: 'Location' },
-          render: () => <Tab.Pane loading={false}>
-            Location
+            <Event
+            />
           </Tab.Pane>,
         },
         {

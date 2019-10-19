@@ -42,6 +42,22 @@ class OrderTransformer extends TransformerAbstract {
       ];
     });
 
+    $data["events"] = $order->events->map(function($data) {
+      return [
+        "id"            => $data->id,
+        "name"          => $data->name,
+        "address"    => $data->address,
+        "startDate"        => $data->start_date,
+        "endDate"        => $data->end_date,
+        "location"         => $data->location,
+        "lat"   => $data->lat,
+        "long"   => $data->long,
+        "description" => $data->description,
+        "active"        => $data->active,
+        "createdAt"     => $data->created_at
+      ];
+    });
+
     return $data;
   }
 }

@@ -6,8 +6,8 @@ import { Tab } from 'semantic-ui-react';
 import ReactCloudinaryUploader from '@app-masters/react-cloudinary-uploader';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import ModalConfirm from '../../components/Modals/Confirm';
 
+import ModalConfirm from '../../components/Modals/Confirm';
 import CoupleList from '../../components/couples/List';
 import CoupleForm from '../../components/couples/Form';
 import CoupleShow from '../../components/couples/ModalShow';

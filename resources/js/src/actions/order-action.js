@@ -150,3 +150,41 @@ export const updateCouple = (data) => {
       });
   };
 };
+
+export const storeEvent = (data) => {
+  return (dispatch) => {
+    return axios.post(`${apiUrl}/storeEvent`, data)
+      .then(response => {
+        dispatch(getOrderCompleted(response.data.data));
+      })
+      .catch(error => {
+        throw(error);
+      });
+  };
+};
+
+export const destroyEvent = (data) => {
+  return (dispatch) => {
+    return axios.get(`${apiUrl}/destroyEvent/${data.id}`)
+      .then(response => {
+      })
+      .catch(error => {
+        throw(error);
+      });
+  };
+};
+
+export const updateEvent = (data) => {
+  return (dispatch) => {
+    return axios.post(`${apiUrl}/updateEvent/${data.id}`, {
+        data: data,
+        _method: 'PUT'
+      })
+      .then(response => {
+        // dispatch(getPackageCompleted(response.data.data))
+      })
+      .catch(error => {
+        throw(error);
+      });
+  };
+};

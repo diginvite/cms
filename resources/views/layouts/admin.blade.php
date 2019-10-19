@@ -30,6 +30,7 @@
   <link rel="stylesheet" href="{!! asset('ajat/css/style.css') !!}">
       {{--  cloudinary  --}}
     <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>  
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZAMH3V01G3WxbAHjw8SmCrrnHzuEns6E&libraries=places"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 

@@ -16,4 +16,8 @@ class Order extends Model{
   public function couples(){
     return $this->hasMany(Couple::class);
   }
+
+  public function events(){
+    return $this->hasMany(Event::class);
+  }
 }
