@@ -32,4 +32,8 @@ class Order extends Model{
   public function invitations(){
     return $this->hasMany(Invitation::class);
   }
+
+  public function guests(){
+    return $this->hasMany(Guest::class);
+  }
 }

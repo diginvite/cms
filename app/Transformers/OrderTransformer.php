@@ -104,6 +104,20 @@ class OrderTransformer extends TransformerAbstract {
       ];
     });
 
+    $data["guests"] = $order->guests->map(function($guest) {
+      return [
+        "id"            => $guest->id,
+        "name"          => $guest->name,
+        "code"          => $guest->code,
+        "email"         => $guest->email,
+        "company"       => $guest->company,
+        "attend"        => $guest->attend,
+        "qty"           => $guest->qty,
+        "wish"          => $guest->wish,
+        "createdAt"     => $guest->created_at
+      ];
+    });
+
     return $data;
   }
 }

@@ -18,6 +18,7 @@ import Cover from './Cover';
 import Gallery from './Gallery';
 import Music from './Music';
 import Invitation from './Invitation';
+import Guest from './Guest';
 
 import { storeOrder, getOrders, toggleActiveOrder, destroyOrder, getOrder } from '../../actions/order-action';
 import { getActivePackages } from '../../actions/package-action';
@@ -269,7 +270,7 @@ class Detail extends Component {
         {
           menuItem: { key: 'guest', icon: 'users', content: 'Guest' },
           render: () => <Tab.Pane loading={false}>
-            Music
+            <Guest/>
           </Tab.Pane>,
         },
       ];
