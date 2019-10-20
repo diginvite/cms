@@ -28,4 +28,8 @@ class Order extends Model{
   public function files(){
     return $this->morphMany(File::class, 'fileable');
   }
+
+  public function invitations(){
+    return $this->hasMany(Invitation::class);
+  }
 }

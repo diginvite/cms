@@ -61,6 +61,9 @@ Route::prefix('v1/api/')->group(function () {
     Route::post('storeFile', 'OrderController@storeFile')->name('order.storeFile');
     Route::get('destroyFile/{id}', 'OrderController@destroyFile')->name('order.destroyFile');
     Route::put('updateFile/{id}', 'OrderController@updateFile')->name('feature.updateFile');
+    // invitation
+    Route::post('importInvitations', 'OrderController@importInvitations')->name('order.importInvitations');
+    Route::get('destroyInvitation/{id}', 'OrderController@destroyInvitation')->name('order.destroyInvitation');
   });
 });
 

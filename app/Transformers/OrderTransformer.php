@@ -92,6 +92,18 @@ class OrderTransformer extends TransformerAbstract {
       ];
     }
 
+    $data["invitations"] = $order->invitations->map(function($invitation) {
+      return [
+        "id"            => $invitation->id,
+        "name"          => $invitation->name,
+        "slug"          => $invitation->slug,
+        "company"       => $invitation->company,
+        "email"         => $invitation->email,
+        "phone"         => $invitation->phone,
+        "createdAt"     => $invitation->created_at
+      ];
+    });
+
     return $data;
   }
 }

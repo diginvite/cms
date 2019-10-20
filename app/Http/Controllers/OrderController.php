@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\File;
 use App\Models\Couple;
 use App\Models\Event;
+use App\Models\Invitation;
 use App\Transformers\OrderTransformer;
 
 class OrderController extends Controller{
@@ -131,5 +132,30 @@ class OrderController extends Controller{
     $data->path = $request->data["path"];
     $data->description = $request->data["description"];
     $data->save();
+  }
+
+  public function importInvitations(Request $request){
+    // return $request->invitations;
+    foreach ($request->invitations as $invitation) {
+      // create slug
+      $slug = str_slug($invitation["name"], '-');
+      if(Invitation::where('slug', $slug)->first() != null)
+        $slug = $slug.'-'.time();
+
+      $data = Invitation::create([
+        "name"      => $invitation["name"],
+        "slug"      => $slug,
+        "company"   => $invitation["company"],
+        "email"     => $invitation["email"],
+        "phone"     => $invitation["phone"],
+        "order_id"  => $request->orderId
+      ]);
+    }
+    $order = Order::find($request->orderId);
+    return $this->show($order->domain);
+  }
+
+  public function destroyInvitation($id){
+    Invitation::find($id)->delete();
   }
 }

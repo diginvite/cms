@@ -226,3 +226,26 @@ export const updateFile = (data) => {
       });
   };
 };
+
+export const importInvitations = (data) => {
+  return (dispatch) => {
+    return axios.post(`${apiUrl}/importInvitations`, data)
+      .then(response => {
+        dispatch(getOrderCompleted(response.data.data));
+      })
+      .catch(error => {
+        throw(error);
+      });
+  };
+};
+
+export const destroyInvitation = (data) => {
+  return (dispatch) => {
+    return axios.get(`${apiUrl}/destroyInvitation/${data.id}`)
+      .then(response => {
+      })
+      .catch(error => {
+        throw(error);
+      });
+  };
+};

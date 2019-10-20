@@ -17,6 +17,7 @@ import Event from './Event';
 import Cover from './Cover';
 import Gallery from './Gallery';
 import Music from './Music';
+import Invitation from './Invitation';
 
 import { storeOrder, getOrders, toggleActiveOrder, destroyOrder, getOrder } from '../../actions/order-action';
 import { getActivePackages } from '../../actions/package-action';
@@ -262,7 +263,7 @@ class Detail extends Component {
         {
           menuItem: { key: 'invitation', icon: 'envelope', content: 'Invitation' },
           render: () => <Tab.Pane loading={false}>
-            Invitation
+            <Invitation/>
           </Tab.Pane>,
         },
         {
