@@ -80,6 +80,17 @@ class OrderTransformer extends TransformerAbstract {
       ];
     }
 
+    $data["music"] = null;
+    $music = $order->files->where('type', "music")->sortByDesc('created_at')->first();
+    if ($music !== null) {
+      $data["music"] = [
+        "id"            => $music->id,
+        "path"          => $music->path,
+        "type"          => $music->type,
+        "description"   => $music->description,
+        "createdAt"     => $music->created_at
+      ];
+    }
 
     return $data;
   }

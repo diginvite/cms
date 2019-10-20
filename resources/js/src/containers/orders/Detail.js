@@ -11,11 +11,12 @@ import SweetAlert from 'react-bootstrap-sweetalert';
 import Table from '../../components/orders/Table';
 import CreateForm from '../../components/orders/Form';
 import Loading from '../../components/Loading';
-import ModalConfirm from '../../components/Modals/Confirm';
+import ModalConfirm from '../../components/modals/Confirm';
 import Couple from './Couple';
 import Event from './Event';
 import Cover from './Cover';
 import Gallery from './Gallery';
+import Music from './Music';
 
 import { storeOrder, getOrders, toggleActiveOrder, destroyOrder, getOrder } from '../../actions/order-action';
 import { getActivePackages } from '../../actions/package-action';
@@ -255,7 +256,7 @@ class Detail extends Component {
         {
           menuItem: { key: 'music', icon: 'music', content: 'Music' },
           render: () => <Tab.Pane loading={false}>
-            Music
+            <Music/>
           </Tab.Pane>,
         },
         {

@@ -142,7 +142,7 @@ const OrderForm = props => {
           options={options}
           placeholder='Ex. Premium'
           value={props.packageId}
-          defaultValue={props.packageId}
+          // defaultValue={props.packageId}
           name="packageId"
           onChange={(e, meta) => props.onChange(e, meta)}
         />

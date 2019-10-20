@@ -17,7 +17,7 @@ import Feature from '../../components/packages/Feature';
 import Loading from '../../components/Loading';
 import Price from '../../components/prices/Table';
 import PriceForm from '../../components/prices/Form';
-import ModalConfirm from '../../components/Modals/Confirm';
+import ModalConfirm from '../../components/modals/Confirm';
 
 class Index extends Component {
   constructor(props){

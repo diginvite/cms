@@ -11,7 +11,7 @@ import SweetAlert from 'react-bootstrap-sweetalert';
 import Table from '../../components/orders/Table';
 import CreateForm from '../../components/orders/Form';
 import Loading from '../../components/Loading';
-import ModalConfirm from '../../components/Modals/Confirm';
+import ModalConfirm from '../../components/modals/Confirm';
 
 import { storeOrder, getOrders, toggleActiveOrder, destroyOrder } from '../../actions/order-action';
 import { getActivePackages } from '../../actions/package-action';

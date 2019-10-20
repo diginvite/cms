@@ -10,7 +10,7 @@ import {storeFile, destroyFile, updateFile} from '../../actions/order-action';
 
 import ImageForm from '../../components/images/Form';
 import ImageList from '../../components/images/List';
-import ModalConfirm from '../../components/Modals/Confirm';
+import ModalConfirm from '../../components/modals/Confirm';
 
 class Cover extends Component{
   constructor(props){

@@ -8,7 +8,7 @@ import moment from 'moment';
 import Moment from 'react-moment';
 import { ToastContainer, toast } from 'react-toastify';
 
-import ModalConfirm from '../../components/Modals/Confirm';
+import ModalConfirm from '../../components/modals/Confirm';
 import EventMap from '../../components/events/Map';
 import EventForm from '../../components/events/Form';
 import EventList from '../../components/events/List';

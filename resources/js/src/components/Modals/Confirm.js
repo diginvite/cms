@@ -1,5 +1,5 @@
-import React from './node_modules/react';
-import { Modal, Button, Icon } from './node_modules/semantic-ui-react';
+import React from 'react';
+import { Modal, Button, Icon } from 'semantic-ui-react';
 
 const ModalConfirm = (props) => {
   return (

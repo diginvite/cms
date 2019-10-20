@@ -50,7 +50,7 @@ const ImageForm = (props) => {
       <Modal.Actions>
         {
           props.delete ?
-          <Button size="tiny" onClick={() => props.onAction('i', 'data', 'destroy')} color="red"><Icon name="trash circle"/>Delete</Button>
+          <Button size="tiny" onClick={() => props.onAction('i', 'data', 'destroy')} color="red"><Icon name="trash"/>Delete</Button>
           : null
         }
         <Button size="tiny" onClick={() => props.onHide()}><Icon name="times circle"/>Close</Button>

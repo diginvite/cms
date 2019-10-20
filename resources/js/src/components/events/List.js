@@ -1,4 +1,4 @@
-import React from 'React';
+import React from 'react';
 import {List, Icon} from 'semantic-ui-react';
 import Moment from 'react-moment';
 import moment from 'moment';

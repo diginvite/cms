@@ -23,6 +23,7 @@ const CoupleList = props => {
               props.data.map((data, i) => {
                 return(
                   <Card
+                    key={i}
                     image={data.image}
                     header={data.name}
                     meta={`Anak ke ${data.child} dari pasangan ${data.father} dan ${data.mother}`}
