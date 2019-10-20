@@ -158,4 +158,19 @@ class OrderController extends Controller{
   public function destroyInvitation($id){
     Invitation::find($id)->delete();
   }
+
+  public function storeInvitation(Request $request){
+    $invitation = Invitation::store($request);
+    $order = Order::find($request->orderId);
+    return $this->show($order->domain);
+  }
+
+  public function updateInvitation(Request $request, $id){
+    $data = Invitation::find($id);
+    $data->name = $request->data["name"];
+    $data->company = $request->data["company"];
+    $data->email = $request->data["email"];
+    $data->phone = $request->data["phone"];
+    $data->save();
+  }
 }

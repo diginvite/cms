@@ -64,6 +64,8 @@ Route::prefix('v1/api/')->group(function () {
     // invitation
     Route::post('importInvitations', 'OrderController@importInvitations')->name('order.importInvitations');
     Route::get('destroyInvitation/{id}', 'OrderController@destroyInvitation')->name('order.destroyInvitation');
+    Route::post('storeInvitation', 'OrderController@storeInvitation')->name('order.storeInvitation');
+    Route::put('updateInvitation/{id}', 'OrderController@updateInvitation')->name('feature.updateInvitation');
   });
 });
 

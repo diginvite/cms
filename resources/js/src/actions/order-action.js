@@ -249,3 +249,30 @@ export const destroyInvitation = (data) => {
       });
   };
 };
+
+export const storeInvitation = (data) => {
+  return (dispatch) => {
+    return axios.post(`${apiUrl}/storeInvitation`, data)
+      .then(response => {
+        dispatch(storeInvitation(response.data.data));
+      })
+      .catch(error => {
+        throw(error);
+      });
+  };
+};
+
+export const updateInvitation = (data) => {
+  return (dispatch) => {
+    return axios.post(`${apiUrl}/updateInvitation/${data.id}`, {
+        data: data,
+        _method: 'PUT'
+      })
+      .then(response => {
+        // dispatch(getPackageCompleted(response.data.data))
+      })
+      .catch(error => {
+        throw(error);
+      });
+  };
+};

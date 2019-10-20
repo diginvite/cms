@@ -27,6 +27,10 @@ const InvitationList = props => {
                     <Table.Cell textAlign='center'>{data.email}</Table.Cell>
                     <Table.Cell textAlign='center'>{data.phone}</Table.Cell>
                     <Table.Cell textAlign='center'>
+                      {!props.temp?
+                        <Button size="tiny"  circular icon='edit' color='blue' onClick={() => props.onAction(i, data, 'edit')}/>
+                        : null
+                      }
                       <Button size="tiny"  circular icon='trash' color='red' onClick={() => props.onAction(i, data, 'destroy')}/>
                     </Table.Cell>
                   </Table.Row>
