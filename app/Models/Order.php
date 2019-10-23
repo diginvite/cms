@@ -36,4 +36,8 @@ class Order extends Model{
   public function guests(){
     return $this->hasMany(Guest::class);
   }
+
+  public function posts(){
+    return $this->hasMany(Post::class);
+  }
 }

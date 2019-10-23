@@ -118,6 +118,36 @@ class OrderTransformer extends TransformerAbstract {
       ];
     });
 
+    $data["quotes"] = [];
+    $quotes = $order->posts->where('type', "quote");
+    foreach ($quotes as $quote) {
+      $data["quotes"][] = [
+        "id"            => $quote->id,
+        "title"         => $quote->title,
+        "slug"          => $quote->slug,
+        "active"        => $quote->active,
+        "date"          => $quote->date,
+        "type"          => $quote->type,
+        "description"   => $quote->description,
+        "createdAt"     => $quote->created_at
+      ];
+    }
+
+    $data["stories"] = [];
+    $stories = $order->posts->where('type', "story")->sortBy('date');
+    foreach ($stories as $story) {
+      $data["stories"][] = [
+        "id"            => $story->id,
+        "title"         => $story->title,
+        "slug"          => $story->slug,
+        "active"        => $story->active,
+        "date"          => $story->date,
+        "type"          => $story->type,
+        "description"   => $story->description,
+        "createdAt"     => $story->created_at
+      ];
+    }
+
     return $data;
   }
 }

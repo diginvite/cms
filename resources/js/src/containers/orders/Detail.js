@@ -19,6 +19,8 @@ import Gallery from './Gallery';
 import Music from './Music';
 import Invitation from './Invitation';
 import Guest from './Guest';
+import Story from './Story';
+import Quote from './Quote';
 
 import { storeOrder, getOrders, toggleActiveOrder, destroyOrder, getOrder } from '../../actions/order-action';
 import { getActivePackages } from '../../actions/package-action';
@@ -259,6 +261,18 @@ class Detail extends Component {
           menuItem: { key: 'music', icon: 'music', content: 'Music' },
           render: () => <Tab.Pane loading={false}>
             <Music/>
+          </Tab.Pane>,
+        },
+        {
+          menuItem: { key: 'loveStory', icon: 'heart', content: 'Love Story' },
+          render: () => <Tab.Pane loading={false}>
+            <Story/>
+          </Tab.Pane>,
+        },
+        {
+          menuItem: { key: 'quote', icon: 'quote right', content: 'Quote' },
+          render: () => <Tab.Pane loading={false}>
+            <Quote/>
           </Tab.Pane>,
         },
         {

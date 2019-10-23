@@ -276,3 +276,41 @@ export const updateInvitation = (data) => {
       });
   };
 };
+
+export const storePost = (data) => {
+  return (dispatch) => {
+    return axios.post(`${apiUrl}/storePost`, data)
+      .then(response => {
+        dispatch(getOrderCompleted(response.data.data));
+      })
+      .catch(error => {
+        throw(error);
+      });
+  };
+};
+
+export const destroyPost = (data) => {
+  return (dispatch) => {
+    return axios.get(`${apiUrl}/destroyPost/${data.id}`)
+      .then(response => {
+      })
+      .catch(error => {
+        throw(error);
+      });
+  };
+};
+
+export const updatePost = (data) => {
+  return (dispatch) => {
+    return axios.post(`${apiUrl}/updatePost/${data.id}`, {
+        data: data,
+        _method: 'PUT'
+      })
+      .then(response => {
+        // dispatch(getPackageCompleted(response.data.data))
+      })
+      .catch(error => {
+        throw(error);
+      });
+  };
+};

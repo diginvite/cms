@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\File;
 use App\Models\Couple;
 use App\Models\Event;
+use App\Models\Post;
 use App\Models\Invitation;
 use App\Transformers\OrderTransformer;
 
@@ -172,5 +173,23 @@ class OrderController extends Controller{
     $data->email = $request->data["email"];
     $data->phone = $request->data["phone"];
     $data->save();
+  }
+
+  public function storePost(Request $request){
+    $post = Post::store($request);
+    $order = Order::find($request->orderId);
+    return $this->show($order->domain);
+  }
+
+  public function updatePost(Request $request, $id){
+    $data = Post::find($id);
+    $data->title = $request->data["title"];
+    $data->date = $request->data["date"];
+    $data->description = $request->data["description"];
+    $data->save();
+  }
+
+  public function destroyPost($id){
+    Post::find($id)->delete();
   }
 }

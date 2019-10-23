@@ -66,6 +66,10 @@ Route::prefix('v1/api/')->group(function () {
     Route::get('destroyInvitation/{id}', 'OrderController@destroyInvitation')->name('order.destroyInvitation');
     Route::post('storeInvitation', 'OrderController@storeInvitation')->name('order.storeInvitation');
     Route::put('updateInvitation/{id}', 'OrderController@updateInvitation')->name('feature.updateInvitation');
+    // post
+    Route::post('storePost', 'OrderController@storePost')->name('order.storePost');
+    Route::get('destroyPost/{id}', 'OrderController@destroyPost')->name('order.destroyPost');
+    Route::put('updatePost/{id}', 'OrderController@updatePost')->name('feature.updatePost');
   });
 });
 
