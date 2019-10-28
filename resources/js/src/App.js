@@ -9,6 +9,7 @@ import PackageIndex from './containers/packages/Index';
 import PackageDetail from './containers/packages/Detail';
 import OrderIndex from './containers/orders/Index';
 import OrderDetail from './containers/orders/Detail';
+import TemplateIndex from './containers/templates/Index';
 
 class App extends Component {
   render() {
@@ -24,6 +25,7 @@ class App extends Component {
               <Route exact path="/package/detail/:slug" component={PackageDetail}/>
               <Route exact path="/order" component={OrderIndex}/>
               <Route exact path="/order/detail/:slug" component={OrderDetail}/>
+              <Route exact path="/template" component={TemplateIndex}/>
             </Layout>
           </Switch>
           </BrowserRouter>

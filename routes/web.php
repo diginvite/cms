@@ -71,6 +71,15 @@ Route::prefix('v1/api/')->group(function () {
     Route::get('destroyPost/{id}', 'OrderController@destroyPost')->name('order.destroyPost');
     Route::put('updatePost/{id}', 'OrderController@updatePost')->name('feature.updatePost');
   });
+
+  Route::prefix('template')->group(function () {
+    Route::post('store', 'TemplateController@store')->name('template.store');
+    Route::get('getData', 'TemplateController@getData')->name('template.getData');
+    Route::put('update/{id}', 'TemplateController@update')->name('template.update');
+    Route::get('toggleActive/{id}', 'TemplateController@toggleActive')->name('template.toggleActive');
+    Route::get('togglePremium/{id}', 'TemplateController@togglePremium')->name('template.togglePremium');
+    Route::get('destroy/{id}', 'TemplateController@destroy')->name('template.destroy');
+  });
 });
 
 

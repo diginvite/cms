@@ -32,9 +32,14 @@ const Sidebar = () => {
                 <Link to="/order">
                 <i className="fa fa-money"></i> <span>Order</span> </Link>
               </li>
+              <li className="header">Template</li>
+              <li>
+                <Link to="/template">
+                <i className="fa fa-image"></i> <span>Template</span> </Link>
+              </li>
               <li className="header">Site</li>
               <li>
-                <a href="#" target="_blank"><i className="fa fa-globe"></i> <span>Site</span> </a>
+                <a href="https://diginvite.com" target="_blank"><i className="fa fa-globe"></i> <span>Site</span> </a>
               </li>
               <li className="header"></li>
             </ul>
