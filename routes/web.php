@@ -18,18 +18,86 @@
 Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
-
-Route::prefix('v1/api/')->group(function () {
-  Route::prefix('feature')->group(function () {
-    Route::get('index', 'FeatureController@index')->name('feature.index');
-  });
-
-  Route::prefix('package')->group(function () {
-    Route::get('index', 'PackageController@index')->name('package.index');
-  });
+Route::get('/', function () {
+  return redirect('login');
 });
 
+Route::get('/login', function () {
+return view('login');
+})->name('login');
 
-Route::get('/{path}', function () {
-  return view('content');
-})->where('path', '.*');
+Route::get('logout', function(){
+Auth::logout();
+return redirect('/');
+});
+
+Route::group(['middleware' => ['auth']], function () {
+  Route::prefix('v1/api/')->group(function () {
+    Route::prefix('feature')->group(function () {
+      Route::get('getData', 'FeatureController@getData')->name('feature.getData');
+      Route::post('store', 'FeatureController@store')->name('feature.store');
+      Route::get('toggleActive/{id}', 'FeatureController@toggleActive')->name('feature.toggleActive');
+      Route::get('destroy/{id}', 'FeatureController@destroy')->name('feature.destroy');
+      Route::get('show/{slug}', 'FeatureController@show')->name('feature.show');
+      Route::put('update/{slug}', 'FeatureController@update')->name('feature.update');
+    });
+  
+    Route::prefix('package')->group(function () {
+      Route::get('getData', 'PackageController@getData')->name('package.getData');
+      Route::get('getActiveData', 'PackageController@getActiveData')->name('package.getActiveData');
+      Route::post('store', 'PackageController@store')->name('package.store');
+      Route::get('toggleActive/{id}', 'PackageController@toggleActive')->name('package.toggleActive');
+      Route::get('destroy/{id}', 'PackageController@destroy')->name('package.destroy');
+      Route::get('show/{slug}', 'PackageController@show')->name('package.show');
+      Route::put('update/{slug}', 'PackageController@update')->name('package.update');
+      Route::put('featureSync/{slug}', 'PackageController@featureSync')->name('package.featureSync');
+      Route::post('storePrice', 'PackageController@storePrice')->name('package.storePrice');
+      Route::get('destroyPrice/{id}', 'PackageController@destroyPrice')->name('package.destroyPrice');
+      Route::post('updatePrice', 'PackageController@updatePrice')->name('package.updatePrice');
+    });
+  
+    Route::prefix('order')->group(function () {
+      Route::get('getData', 'OrderController@getData')->name('order.getData');
+      Route::post('store', 'OrderController@store')->name('order.store');
+      Route::get('toggleActive/{id}', 'OrderController@toggleActive')->name('order.toggleActive');
+      Route::get('destroy/{id}', 'OrderController@destroy')->name('order.destroy');
+      Route::get('show/{slug}', 'OrderController@show')->name('order.show');
+      // price
+      Route::post('storeCouple', 'OrderController@storeCouple')->name('order.storeCouple');
+      Route::get('destroyCouple/{id}', 'OrderController@destroyCouple')->name('order.destroyCouple');
+      Route::put('updateCouple/{id}', 'OrderController@updateCouple')->name('feature.updateCouple');
+      // event
+      Route::post('storeEvent', 'OrderController@storeEvent')->name('order.storeEvent');
+      Route::get('destroyEvent/{id}', 'OrderController@destroyEvent')->name('order.destroyEvent');
+      Route::put('updateEvent/{id}', 'OrderController@updateEvent')->name('feature.updateEvent');
+      // file
+      Route::post('storeFile', 'OrderController@storeFile')->name('order.storeFile');
+      Route::get('destroyFile/{id}', 'OrderController@destroyFile')->name('order.destroyFile');
+      Route::put('updateFile/{id}', 'OrderController@updateFile')->name('feature.updateFile');
+      // invitation
+      Route::post('importInvitations', 'OrderController@importInvitations')->name('order.importInvitations');
+      Route::get('destroyInvitation/{id}', 'OrderController@destroyInvitation')->name('order.destroyInvitation');
+      Route::post('storeInvitation', 'OrderController@storeInvitation')->name('order.storeInvitation');
+      Route::put('updateInvitation/{id}', 'OrderController@updateInvitation')->name('feature.updateInvitation');
+      // post
+      Route::post('storePost', 'OrderController@storePost')->name('order.storePost');
+      Route::get('destroyPost/{id}', 'OrderController@destroyPost')->name('order.destroyPost');
+      Route::put('updatePost/{id}', 'OrderController@updatePost')->name('feature.updatePost');
+    });
+  
+    Route::prefix('template')->group(function () {
+      Route::post('store', 'TemplateController@store')->name('template.store');
+      Route::get('getData', 'TemplateController@getData')->name('template.getData');
+      Route::put('update/{id}', 'TemplateController@update')->name('template.update');
+      Route::get('toggleActive/{id}', 'TemplateController@toggleActive')->name('template.toggleActive');
+      Route::get('togglePremium/{id}', 'TemplateController@togglePremium')->name('template.togglePremium');
+      Route::get('destroy/{id}', 'TemplateController@destroy')->name('template.destroy');
+    });
+  });
+  
+  
+  Route::get('/{path}', function () {
+    return view('content');
+  })->where('path', '.*');
+
+});

@@ -5,20 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>ajatdarojat45</title>
+  <title>CMS - Diginvite</title>
   <!-- Scripts -->
   {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
   <!-- Fonts -->
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
   <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="{!! asset('AdminLTE-245/bower_components/bootstrap/dist/css/bootstrap.min.css') !!}">
+  <link rel="stylesheet" href="{!! asset('AdminLTE-245/bower_components/bootstrap/dist/css/bootstrap.css') !!}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{!! asset('AdminLTE-245/bower_components/font-awesome/css/font-awesome.min.css') !!}">
   <!-- Ionicons -->
   <link rel="stylesheet" href="{!! asset('AdminLTE-245/bower_components/Ionicons/css/ionicons.min.css') !!}">
   <!-- Theme style -->
-  <link rel="stylesheet" href="{!! asset('AdminLTE-245/dist/css/AdminLTE.min.css') !!}">
+  <link rel="stylesheet" href="{!! asset('AdminLTE-245/dist/css/AdminLTE.css') !!}">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{!! asset('AdminLTE-245/dist/css/skins/_all-skins.min.css') !!}">
@@ -28,6 +28,9 @@
   <link rel="stylesheet" href="{!! asset('AdminLTE-245/plugins/pace/pace.min.css') !!}">
   {{-- ajat --}}
   <link rel="stylesheet" href="{!! asset('ajat/css/style.css') !!}">
+      {{--  cloudinary  --}}
+    <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>  
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZAMH3V01G3WxbAHjw8SmCrrnHzuEns6E&libraries=places"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 

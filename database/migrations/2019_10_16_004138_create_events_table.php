@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGuestsTable extends Migration
+class CreateEventsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,17 @@ class CreateGuestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('guests', function (Blueprint $table) {
+        Schema::create('events', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('code');
             $table->string('name');
-            $table->integer('attend');
-            $table->integer('qty');
-            $table->text('wish')->default(NULL);
+            $table->text('description')->default(NULL);
+            $table->dateTime('start_date');
+            $table->dateTime('end_date');
+            $table->text('address');
+            $table->text('location')->default(NULL);
             $table->boolean('active')->default(1);
-            $table->bigInteger('customer_id')->unsigned();
-            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
+            $table->bigInteger('order_id')->unsigned();
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -35,6 +36,6 @@ class CreateGuestsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('guests');
+        Schema::dropIfExists('events');
     }
 }

@@ -17,7 +17,8 @@ class CreatePackagesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('slug');
-            $table->text('description');
+            $table->text('description')->default(NULL);
+            $table->boolean('active')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

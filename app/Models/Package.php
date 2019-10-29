@@ -10,6 +10,10 @@ class Package extends Model{
   protected $guarded = ['id'];
 
   public function features(){
-    return $this->belongsToMany(Feature::class);
+    return $this->belongsToMany(Feature::class)->withPivot('quantity', 'unlimited', 'active');
+  }
+
+  public function prices(){
+    return $this->morphMany(Price::class, 'priceable');
   }
 }

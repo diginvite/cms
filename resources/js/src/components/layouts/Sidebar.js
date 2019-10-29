@@ -1,16 +1,9 @@
-import React, { Component } from 'react';
-import {Link, Route}  from 'react-router-dom';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import React from 'react';
+import {Link} from 'react-router-dom';
 
-export class Sidebar extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <React.Fragment>
+const Sidebar = () => {
+  return(
+    <React.Fragment>
         <aside className="main-sidebar">
           <section className="sidebar">
             <div className="user-panel">
@@ -35,35 +28,32 @@ export class Sidebar extends Component {
                 <Link to="/package"><i className="fa fa-gift"></i> <span>Package</span> </Link>
               </li>
               <li className="header">Menu</li>
-              <li><Link to="/customer">
-                <i className="fa fa-users"></i> <span>Customer</span> </Link>
+              <li>
+                <Link to="/order">
+                <i className="fa fa-money"></i> <span>Order</span> </Link>
+              </li>
+              <li className="header">Template</li>
+              <li>
+                <Link to="/template">
+                <i className="fa fa-image"></i> <span>Template</span> </Link>
+              </li>
+              <li className="header">User</li>
+              <li>
+                <Link to="/user">
+                <i className="fa fa-users"></i> <span>User</span> </Link>
               </li>
               <li className="header">Site</li>
               <li>
-                <a href="#" target="_blank"><i className="fa fa-globe"></i> <span>Site</span> </a>
+                <a href="https://diginvite.com" target="_blank"><i className="fa fa-globe"></i> <span>Site</span> </a>
               </li>
               <li className="header"></li>
             </ul>
           </section>
         </aside>
       </React.Fragment>
-    );
-  }
+  )
 }
 
-// function mapStateToProps(state){
-//   return {
-//     profile: state.users.profile,
-//   };
-// };
-// function mapDispatchToProps(dispatch){
-//   return bindActionCreators({
-//   }, dispatch)
-// };
-
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(Sidebar);
-
 export default Sidebar;
+
+
