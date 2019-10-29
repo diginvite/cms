@@ -36,17 +36,21 @@ class Index extends Component {
   }
 
   onChange(e, { value, name }){
-    this.setState({
-      [name]: value
-    }, () => {
-      if (name == 'name') {
-        if (this.state.name == '') {
-          this.setState({nameError: true})
-        }else{
-          this.setState({nameError: false})
+    if (name === 'valueType') {
+      this.setState({[name]: !value})
+    }else{
+      this.setState({
+        [name]: value
+      }, () => {
+        if (name == 'name') {
+          if (this.state.name == '') {
+            this.setState({nameError: true})
+          }else{
+            this.setState({nameError: false})
+          }
         }
-      }
-    })
+      });
+    }
   }
 
   onSubmit(e){
@@ -176,13 +180,13 @@ class Index extends Component {
             </h1>
             <ol className="breadcrumb">
               <li className=""><Link to="/dashboard">Dashboard</Link></li>
-              <li className="active">Package</li>
+              <li className="active">Feature</li>
             </ol>
           </section>
           <section className="content">
             <div className="box box-border-radius">
               <div className="box-header with-border">
-                <h3 className="box-title">Package</h3>
+                <h3 className="box-title">Feature</h3>
               </div>
               <div className="box-body">
                 <div className="row">

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Image, Card, Form, Checkbox, Icon, Table} from 'semantic-ui-react';
+import { Button, Image, Card, Form, Checkbox, Icon, Table, Radio} from 'semantic-ui-react';
 import Moment from 'react-moment';
 import {Link}  from 'react-router-dom';
 
@@ -39,7 +39,14 @@ const Feature = props => {
                     }
                   </Table.Cell>
                   <Table.Cell textAlign='center'>
-                  <Checkbox checked={data.detail.active} onChange={() => props.onActiveChange(i, data)}/>
+                    {/* <Checkbox checked={data.detail.active} onChange={() => props.onActiveChange(i, data)}/> */}
+                    <Radio
+                      toggle
+                      defaultChecked={data.detail.active}
+                      value={data.detail.active}
+                      size="mini"
+                      onChange={() => props.onActiveChange(i, data)}
+                    />
                   </Table.Cell>
                   <Table.Cell textAlign='center'>
                     {
@@ -57,7 +64,14 @@ const Feature = props => {
                   <Table.Cell textAlign='center'>
                     {
                       data.value_type ?
-                      <Checkbox checked={data.detail.unlimited} onChange={() => props.onUnlimitedChange(i, data)}/>
+                      // <Checkbox checked={data.detail.unlimited} onChange={() => props.onUnlimitedChange(i, data)}/>
+                      <Radio
+                        toggle
+                        defaultChecked={data.detail.unlimited}
+                        value={data.detail.unlimited}
+                        size="mini"
+                        onChange={() => props.onUnlimitedChange(i, data)}
+                      />
                       : null
                     }
                   </Table.Cell>

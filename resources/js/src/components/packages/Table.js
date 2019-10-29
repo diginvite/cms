@@ -2,6 +2,7 @@ import React from 'react';
 import { Table, Button, Icon } from 'semantic-ui-react';
 import Moment from 'react-moment';
 import {Link}  from 'react-router-dom';
+import NumberFormat from 'react-currency-format';
 
 const PackageTable = props => {
   return(
@@ -30,14 +31,16 @@ const PackageTable = props => {
                     <Table.Cell textAlign='right'>
                       {
                         data.priceActive !== null ?
-                        data.priceActive.price
+                        // data.priceActive.price
+                        <NumberFormat value={data.priceActive.price} displayType={'text'} thousandSeparator={true} prefix="Rp. "/>
                         : null
                       }
                     </Table.Cell>
                     <Table.Cell textAlign='right'>
                       {
                         data.priceActive !== null ?
-                        data.priceActive.sellingPrice
+                        // data.priceActive.sellingPrice
+                        <NumberFormat value={data.priceActive.sellingPrice} displayType={'text'} thousandSeparator={true} prefix="Rp. "/>
                         : null
                       }
                     </Table.Cell>

@@ -43,7 +43,7 @@ const TemplateForm = props => {
           value={props.domain}
           name="domain"
         />
-        <Radio 
+        <Form.Radio 
           toggle 
           label='Premium'
           fluid

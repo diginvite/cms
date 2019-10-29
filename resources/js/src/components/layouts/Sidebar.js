@@ -37,6 +37,11 @@ const Sidebar = () => {
                 <Link to="/template">
                 <i className="fa fa-image"></i> <span>Template</span> </Link>
               </li>
+              <li className="header">User</li>
+              <li>
+                <Link to="/user">
+                <i className="fa fa-users"></i> <span>User</span> </Link>
+              </li>
               <li className="header">Site</li>
               <li>
                 <a href="https://diginvite.com" target="_blank"><i className="fa fa-globe"></i> <span>Site</span> </a>

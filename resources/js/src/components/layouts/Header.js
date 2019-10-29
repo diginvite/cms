@@ -13,8 +13,8 @@ export class Header extends Component {
       return (<React.Fragment>
         <header className="main-header">
           <Link to="/back/dashboard" className="logo">
-            <span className="logo-mini"><b>LBGR</b></span>
-            <span className="logo-lg">Little Bogor</span>
+            <span className="logo-mini"><b>dgnvt</b></span>
+            <span className="logo-lg">Diginvite</span>
           </Link>
           <nav className="navbar navbar-static-top">
           <a href="#" className="sidebar-toggle" data-toggle="push-menu" role="button">

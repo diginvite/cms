@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Button, Icon } from 'semantic-ui-react';
+import { Table, Button, Icon, Radio, Label } from 'semantic-ui-react';
 import Moment from 'react-moment';
 import {Link}  from 'react-router-dom';
 
@@ -12,7 +12,7 @@ const FeatureTable = props => {
             <Table.Row>
               <Table.HeaderCell textAlign='center'>No</Table.HeaderCell>
               <Table.HeaderCell textAlign='center'>Name</Table.HeaderCell>
-              <Table.HeaderCell textAlign='center'>Value Type</Table.HeaderCell>
+              <Table.HeaderCell textAlign='center'>Flexibility</Table.HeaderCell>
               <Table.HeaderCell textAlign='center'>Package</Table.HeaderCell>
               <Table.HeaderCell textAlign='center'>Active</Table.HeaderCell>
               <Table.HeaderCell textAlign='center'>Created at</Table.HeaderCell>
@@ -28,8 +28,9 @@ const FeatureTable = props => {
                     <Table.Cell>{data.name}</Table.Cell>
                     <Table.Cell textAlign='center'>
                       {data.valueType ?
-                        "Flexible"
-                        : "Fixed"
+                        <Label color="blue">Yes</Label>
+                        :
+                        <Label color="default">No</Label>
                       }
                     </Table.Cell>
                     <Table.Cell textAlign='center'>{data.packages.length}</Table.Cell>

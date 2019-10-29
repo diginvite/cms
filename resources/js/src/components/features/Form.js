@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Checkbox, Form, Icon } from 'semantic-ui-react';
+import { Button, Checkbox, Form, Icon, Radio } from 'semantic-ui-react';
 
 const FeatureForm = props => {
   let nameError;
@@ -46,7 +46,16 @@ const FeatureForm = props => {
           value={props.description}
           onChange={(e, meta) => props.onChange(e, meta)}
         />
-        <Form.Select
+        <Form.Radio
+          label="Flexibility"
+          toggle
+          defaultChecked={props.valueType}
+          value={props.valueType}
+          name="valueType"
+          size="mini"
+          onChange={(e, meta) => props.onChange(e, meta)}
+        />
+        {/* <Form.Select
           error={valueTypeError}
           fluid
           label='Value Type'
@@ -56,7 +65,7 @@ const FeatureForm = props => {
           // defaultValue={props.valueType}
           name="valueType"
           onChange={(e, meta) => props.onChange(e, meta)}
-        />
+        /> */}
         <Button type='submit' primary><Icon name='save' />Save</Button>
       </Form>
     </React.Fragment>

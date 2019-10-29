@@ -301,7 +301,7 @@ class Index extends Component {
           <section className="content">
             <div className="box box-border-radius">
               <div className="box-header with-border">
-                <h3 className="box-title">Package</h3>
+                <h3 className="box-title">Package Detail</h3>
               </div>
               <div className="box-body">
                 <div className="row">
