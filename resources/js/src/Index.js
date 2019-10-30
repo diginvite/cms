@@ -9,7 +9,7 @@ import App from './App';
 
 import allReducers from './reducers';
 
-const store = createStore(allReducers, applyMiddleware(thunk, logger));
+const store = createStore(allReducers, applyMiddleware(thunk));
 
 ReactDOM.render(
     <Provider store={store}>
