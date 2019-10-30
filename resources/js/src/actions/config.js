@@ -1,4 +1,4 @@
-const baseUrl = 'https://cms.diginvite.com/v1/api';
+const baseUrl = 'https://cms.diginvite.com/v1';
 
 export const packageApi = baseUrl+'/package';
 export const featureApi = baseUrl+'/feature';
