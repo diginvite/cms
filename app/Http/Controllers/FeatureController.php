@@ -9,7 +9,7 @@ use App\Transformers\FeatureTransformer;
 
 class FeatureController extends Controller{
   public function getData(){
-    $data = Feature::orderBy('active', 'desc')->orderBy('name', 'asc')->paginate(15);
+    $data = Feature::orderBy('active', 'desc')->orderBy('name', 'asc')->paginate(20);
     return fractal($data, new FeatureTransformer())->toArray();
   }
 
