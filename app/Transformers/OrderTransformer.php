@@ -58,15 +58,17 @@ class OrderTransformer extends TransformerAbstract {
       ];
     });
 
-    $data["covers"] = $order->files->where('type', 'cover')->map(function($order) {
-      return [
+    $data["covers"] = [];
+    $covers = $order->files->where('type', 'cover');
+    foreach ($covers as $cover) {
+      $data["covers"][] = [
         "id"            => $order->id,
         "path"          => $order->path,
         "type"          => $order->type,
         "description"   => $order->description,
         "createdAt"     => $order->created_at
       ];
-    });
+    }
 
     $data["galleries"] = [];
     $galleries = $order->files->where('type', "gallery");
