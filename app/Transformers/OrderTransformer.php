@@ -62,11 +62,11 @@ class OrderTransformer extends TransformerAbstract {
     $covers = $order->files->where('type', 'cover');
     foreach ($covers as $cover) {
       $data["covers"][] = [
-        "id"            => $order->id,
-        "path"          => $order->path,
-        "type"          => $order->type,
-        "description"   => $order->description,
-        "createdAt"     => $order->created_at
+        "id"            => $cover->id,
+        "path"          => $cover->path,
+        "type"          => $cover->type,
+        "description"   => $cover->description,
+        "createdAt"     => $cover->created_at
       ];
     }
 
